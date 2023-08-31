@@ -32,13 +32,35 @@
         <hr>
         <div class="row">
             <div class="col-lg-7">Foglalásaim:</div>
-            <div class="col-lg-5">58</div>
+            <div class="col-lg-5">{{bookings.count}}</div>
         </div>
 
         <div class="row">
             <div class="col-lg-7">Elfogadott foglalások:</div>
-            <div class="col-lg-5">8</div>
+            <div class="col-lg-5">{{accept_bookings.count}}</div>
         </div>
+        <hr>
+
+        {% for booking in bookings %}
+            <div class="row">
+                <div class="col-12">
+                    <span class="badge bg-dark">
+                    {{booking.start_time|date:'Y-m-d H'}}
+                    {%if booking.start_time.minute != 0 %}: {{booking.start_time.minute}}{% endif %}
+                    -
+                    {{booking.end_time|time:'H'}}
+                    {%if booking.end_time.minute != 0 %}: {{booking.end_time.minute}}{% endif %}
+                    </span>
+                </div>
+
+
+                <div class="col">{{booking.description}}</div>
+                <div class="col-md-4 {% if booking.is_accept %}text-success{% else %}text-danger{%endif%}">{{booking.accept_description}}</div>
+                <div class="col-auto">{% if booking.is_accept %}<i class="fa-solid fa-check text-success"></i>{% else %}<i class="fa-solid fa-xmark text-danger"></i>{%endif%}</div>
+                <hr>
+            </div>
+
+        {% endfor %}
 
     </div>
 </div>
