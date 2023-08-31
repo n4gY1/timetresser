@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Foglalások{% endblock title %}
+
+
+{% block content_title %}Függőben lévő foglalások{% endblock content_title %}
+
+{% block content %}
+
+<div class="text-center">
+    <h3 class="text-light">{{service_provider.name}}</h3>
+    <h5 class="small text-dark">{{service_provider.user_profile.get_name}}</h5>
+    <hr>
+</div>
+
+{% for booking in bookings %}
+<div class="row mx-0 mb-1">
+    <div class="card w-100 bg-primary">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-auto">
+                    <img class="avatar-mini" src="{{booking.booked_user.profile_picture.url}}" alt="">
+                </div>
+
+                <div class="col-md-3">
+                    <div><b>{{booking.booked_user.get_name}}</b></div>
+                    <div>{{booking.created_at|timesince}}</div>
+                    <div class="text-light"><span class="badge bg-warning text-dark">{{booking.start_time}}</span></div>
+
+                </div>
+
+                <div class="col col-md-auto">
+                    <div class="text-light">{{booking.description|truncatechars:150}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header bg-primary text-end">
+            <a href="{% url 'show_not_accept_booking' booking.pk %}" class="btn btn-info"><i class="fa-regular fa-eye"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+{% endfor %}
+
+
+
+{% endblock content %}

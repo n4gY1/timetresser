@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Beállítások{% endblock title %}
+
+
+{% block content_title %}Profilom beállításai{% endblock content_title %}
+
+{% block content %}
+
+<div class="text-center">
+    <img src="{{user_profile.profile_picture.url}}" alt="user profile" class="avatar shadow-4-strong">
+    <hr>
+    <h3 class="text-light">{{user_profile.get_name}}</h3>
+    <hr>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.phone_number.label_tag}}
+            {{form.phone_number}}
+
+            {{form.profile_picture.label_tag}}
+            <input type="file" name="profile_picture" id="id_profile_picture" class="form-control bg-primary" accept="image/png, image/gif, image/jpeg"  >
+            <button type="submit" class="btn btn-success my-2 w-100">Mentés</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <span class="small"><em>Profilom törlése - Figyelem, a törlés végleges!</em></span>
+        <a href="" class="btn btn-danger w-100">Profilom törlése</a>
+        <hr>
+        <div class="row">
+            <div class="col-lg-7">Foglalásaim:</div>
+            <div class="col-lg-5">58</div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7">Elfogadott foglalások:</div>
+            <div class="col-lg-5">8</div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock content %}

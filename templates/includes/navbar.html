@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-xl bg-primary fixed-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">TimeTresser</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+
+
+        <li class="nav-item p-0 m-0 dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Üzletek megtekintése</a>
+          <div class="dropdown-menu">
+            {% for obj in SERVICE_TYPES%}
+            <a class="dropdown-item" href="/services/{{obj.0}}/">{{obj.1}}</a>
+            {% endfor %}
+          </div>
+        </li>
+
+
+        <!-- Szolgáltatói menü -->
+        {% if is_provider %}
+        <li class="nav-item m-0 p-0">
+          <a class="nav-link" href="{% url 'service_settings' %}">
+            Beállítások
+          </a>
+        </li>
+
+        <li class="nav-item p-0 m-0 dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Foglalások
+             {% if not_accepted_booking != 0 %}
+            <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger">
+              {{not_accepted_booking}}
+              <span class="visually-hidden">unread booking</span>
+            </span>
+            {% endif %}
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'list_not_accept_booking' %}">Függőben lévő foglalások</a>
+            <a class="dropdown-item" href="{% url 'create_guest_booking' %}">Foglalás rögzítése</a>
+            <a class="dropdown-item" href="{% url 'list_not_accept_booking' %}">Foglalás szerkesztése</a>
+            <a class="dropdown-item" href="{% url 'list_accept_booking' %}">Foglalások megtekintése</a>
+          </div>
+        </li>
+        {% endif %}
+
+        <!-- Hitelesített felhasználó menü -->
+        {% if request.user.is_authenticated %}
+        <li class="nav-item  p-0 m-0">
+          <a class="nav-link" href="{% url 'settings' %}">Profilom</a>
+        </li>
+        {% endif %}
+
+
+
+
+      </ul>
+
+      <form class="d-flex">
+        <input class="form-control me-sm-2 bg-info" type="search" placeholder="Search">
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+      <ul class="navbar-nav text-right">
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item p-0 m-0"><a class="nav-link" href="{% url 'logout' %}">Kijelentkezés</a></li>
+        {% else %}
+        <li class="nav-item p-0 m-0"><a  class="nav-link"  href="{% url 'login' %}">Bejelentkezés</a></li>
+        {% endif %}
+      </ul>
+
+
+
+    </div>
+  </div>
+</nav>

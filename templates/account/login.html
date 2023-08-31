@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Bejelentkezés{% endblock title %}
+
+{% block content_title %}Bejelentkezés{% endblock content_title %}
+
+{% block content %}
+<form action="" class="form" method="post">
+    {% csrf_token %}
+    <label for="id_email">Email</label>
+    <input type="email" name="email" id="id_email" placeholder="email" class="form-control bg-primary">
+
+    <label for="id_password" >Jelszó</label>
+    <input type="password" name="password" id="id_password" placeholder="Jelszó" class="form-control bg-primary ">
+    <button type="submit" class="btn w-100 btn-success my-2">Bejelentkezés</button>
+    <hr>
+    <p class="text-center">Nincs még felhasználói fiókja?</p>
+    <div class="text-center">
+         <a href="{% url 'register' %}" class="text-info">Regisztráció</a>
+    </div>
+
+</form>
+
+
+{% endblock content %}

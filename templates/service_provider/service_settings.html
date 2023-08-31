@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Üzeletem beállításai{% endblock title %}
+
+
+{% block content_title %}Üzeletem beállításai{% endblock content_title %}
+
+{% block content %}
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<form action="" method="post" class="form">
+
+{% csrf_token %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-primary ">
+      <div class="modal-header">
+        <h1 class="modal-title text-light fs-5" id="exampleModalLabel">Új nyitvatartás</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="id_day">Nap</label>
+          {{opening_hour_form.day}}
+          <label for="id_start_time">Nyitás (óra:perc)</label>
+          <input type="time" id="id_start_time" name="start_time" class="form-control bg-primary text-light" required>
+          <label for="id_end_time">Zárás (óra:perc)</label>
+          <input type="time" id="id_end_time" name="end_time" class="form-control bg-primary text-light" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<div class="text-center">
+    <img src="{{service_provider.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar-wide">
+    <hr>
+    <h3 class="text-light">{{service_provider.name}}</h3>
+    <h5 class="small text-dark">{{service_provider.user_profile.get_name}}</h5>
+    <hr>
+</div>
+<div class="row">
+
+
+    <div class="col-md-6">
+        <span class="small"><em>Üzeletem törlése - Figyelem, a törlés végleges!</em></span>
+        <a href="" class="btn btn-danger w-100">Üzletem törlése</a>
+        <hr>
+        <div class="row">
+            <div class="col-lg-6">Új Foglalásaim:</div>
+            <div class="col-lg-6">{{not_accepted_booking}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">Mai napi foglalásaim</div>
+            <div class="col-lg-6">{{today_booking}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">Holnapi foglalásaim</div>
+            <div class="col-lg-6">{{tomorrow_booking}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">Licensz lejárata:</div>
+            <div class="col-lg-6">{{service_provider.expired_date}}</div>
+        </div>
+
+        <a href="" class="btn btn-info w-100">Hosszabbítás</a>
+        <hr>
+
+        <h5 class="text-light">Nyitva tartás</h5>
+        <div class="row">
+            <div class="col-3 text-light">Nap</div>
+            <div class="col-4 text-light"><b>Nyitás</b></div>
+            <div class="col-4 text-light"><b>Zárás</b></div>
+            <div class="col-1 text-light"></div>
+        </div>
+        <div class="row">
+            {% for open in open_hours %}
+                <div class="col-3">{{open.get_day_display}}</div>
+                <div class="col-4">{{open.start_time}}</div>
+                <div class="col-4">{{open.end_time}}</div>
+            <div class="col-1"><a href="{% url 'delete_opening_hour' open.pk %}" class=""><i class="fa-solid fa-trash-can text-danger"></i></a></div>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Nyitva tartás módosítása
+        </button>
+
+        <hr>
+
+
+    </div>
+
+
+    <div class="col-md-6">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            {{form.name.label_tag}}
+            {{form.name}}
+
+            {{form.name.label_tag}}
+            {{form.name}}
+
+            {{form.city.label_tag}}
+            {{form.city}}
+
+            {{form.state.label_tag}}
+            {{form.state}}
+
+            {{form.street.label_tag}}
+            {{form.street}}
+
+            {{form.zip_code.label_tag}}
+            {{form.zip_code}}
+
+            {{form.booking_time_interval.label_tag}}
+            {{form.booking_time_interval}}
+
+            {{form.booking_date_nr.label_tag}}
+            {{form.booking_date_nr}}
+
+            {{form.mobile.label_tag}}
+            {{form.mobile}}
+
+
+            {{form.description.label_tag}}
+            {{form.description}}
+
+
+            {{form.prices.label_tag}}
+            {{form.prices}}
+
+            {{form.type.label_tag}}
+            {{form.type}}
+
+
+            {{form.banner_picture.label_tag}}
+            <input type="file" name="banner_picture" id="id_banner_picture" class="form-control bg-primary" accept="image/png, image/gif, image/jpeg"  >
+            <button type="submit" class="btn btn-success my-2 w-100">Mentés</button>
+        </form>
+    </div>
+
+
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,7 @@
+{% autoescape off %}
+
+
+Hi {{user.email}}!
+Please click activation link for verification your account.
+http://{{current_site}}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

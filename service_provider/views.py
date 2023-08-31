@@ -1,0 +1,190 @@
+import datetime
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http import HttpResponseServerError, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
+
+from account.models import UserProfile
+from booking.models import Booking
+from service_provider.forms import ServiceProviderForm, ServiceProviderOpeningHoursForm
+from service_provider.models import ServiceProvider, ServiceProviderOpeningHours
+
+import pytz
+
+from service_provider.utils import FreeBookingTimes
+
+
+# Create your views here.
+def home(request):
+    objs = ServiceProvider.objects.filter(expired_date__gte=datetime.datetime.now())
+    context = {
+        "objs": objs
+    }
+
+    return render(request, 'service_provider/list_service_provider.html', context)
+
+
+@login_required(login_url="login")
+def service_settings(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+
+    service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
+    form = ServiceProviderForm(instance=service_provider)
+    current_date = datetime.datetime.now(tz=pytz.timezone('Europe/Budapest'))
+    today = datetime.datetime(year=current_date.year, month=current_date.month,
+                              day=current_date.day, hour=0, minute=0,
+                              )  # mai nap
+    tomorrow = today + datetime.timedelta(days=1)
+    after_tomorrow = tomorrow + datetime.timedelta(days=1)
+
+    opening_hour_form = ServiceProviderOpeningHoursForm()
+
+    open_hours = service_provider.opening.all().order_by('day')
+
+    if request.method == 'POST':
+        form = ServiceProviderForm(request.POST, request.FILES, instance=service_provider)
+        opening_hour_form = ServiceProviderOpeningHoursForm(request.POST)
+        if form.is_valid():
+
+            form.save()
+            messages.success(request, "Módosítás sikeres")
+
+        if opening_hour_form.is_valid():
+            day = opening_hour_form.cleaned_data['day']
+            start_ime = opening_hour_form.cleaned_data['start_time'] # 7:50
+            end_time = opening_hour_form.cleaned_data['end_time']
+            print(start_ime,type(start_ime))
+
+            opening_day = ServiceProviderOpeningHours.objects.filter(
+                day=day, service_provider=service_provider)
+            if opening_day:
+                tmp = ServiceProviderOpeningHoursForm(request.POST, instance=opening_day[0])
+                tmp.save()
+            else:
+                ServiceProviderOpeningHours.objects.create(
+                    day=day,
+                    start_time=start_ime,
+                    end_time=end_time,
+                    service_provider=service_provider
+                )
+        return redirect('service_settings')
+
+    if service_provider:
+        context = {
+            "service_provider": service_provider,
+            "form": form,
+            "today_booking": service_provider.bookings.all().filter(start_time__gte=today,
+                                                                    end_time__lte=tomorrow).count(),
+            "tomorrow_booking": service_provider.bookings.all().filter(start_time__gte=tomorrow,
+                                                                       end_time__lte=after_tomorrow).count(),
+
+            "open_hours": open_hours,
+            "opening_hour_form": opening_hour_form
+        }
+        return render(request, 'service_provider/service_settings.html', context)
+    else:
+        return HttpResponseServerError("Nincs jogosultsága a megtekintéshez")
+
+
+def list_service_providers(request, serv_type):
+    objs = ServiceProvider.objects.filter(type=serv_type)
+    context = {
+        "objs": objs,
+
+    }
+
+    return render(request, 'service_provider/list_service_provider.html', context)
+
+
+def view_service(request, service_slug):
+    current_date = datetime.datetime.now(tz=pytz.timezone('Europe/Budapest'))
+
+    obj = ServiceProvider.objects.get(slug=service_slug, expired_date__gte=current_date)
+
+    current_date = datetime.datetime(year=current_date.year, month=current_date.month,
+                                     day=current_date.day, hour=0, minute=0,
+                                     ) + datetime.timedelta(days=1)  # holnapi nap
+
+    two_day_later = current_date + datetime.timedelta(days=2)  # 2 nap múlva
+    # igazából a holnapi nap
+
+    max_booking_date = obj.booking_date_nr
+    max_time_interval = obj.booking_time_interval
+
+    free_times = []
+
+    for i in range(1, max_booking_date):
+        week_day = (current_date.weekday() + 1)  # így kapjuk meg a magyar hét napját (vasárnap 0 ik)
+        # it ha vasarnapra esik, akkor at allitjuk 0-ra, alias vasarnapra
+
+        open_times = obj.opening.all().filter(day=week_day)
+        # megnézzük a hét napját és az ahhoz tartozó nyitva tartást
+        free_booking_times = FreeBookingTimes(current_date)
+
+        for ot in open_times:
+            free_booking_times.set_opening_hours(ot.start_time, ot.end_time)
+
+            # idointervallum szerinti bontás
+            start_open = datetime.datetime(
+                year=current_date.year, month=current_date.month, day=current_date.day,
+                hour=ot.start_time.hour, minute=ot.start_time.minute
+            )
+
+            end_open = datetime.datetime(
+                year=current_date.year, month=current_date.month, day=current_date.day, hour=ot.end_time.hour,
+                minute=ot.end_time.minute
+            )
+
+            # megyunk addig a megadott intervallum alapján amíg el nem fogy
+            while start_open < end_open:
+                tmp = start_open + datetime.timedelta(minutes=max_time_interval)
+
+                booking = Booking.objects.filter(
+                    Q(service=obj, is_accept=True) &
+                    Q(start_time__lte=start_open, end_time__gt=tmp) |
+                    Q(start_time__gte=start_open, end_time__lte=tmp) |
+                    Q(start_time__gte=start_open, end_time__gte=tmp, start_time__lte=tmp) |
+                    Q(start_time__lte=start_open, end_time__lte=tmp, end_time__gte=start_open)
+                )
+                if not booking:
+                    free_booking_times.add_free_time(start_open)
+
+                start_open = tmp
+            free_times.append(free_booking_times)
+
+        # itt adunk hozzá még egy napot
+        current_date = current_date + datetime.timedelta(days=1)
+
+    open_hours = obj.opening.all().order_by("day")
+
+    context = {
+        "obj": obj,
+        "open_hours": open_hours,
+        "free_times": free_times,
+    }
+    return render(request, 'service_provider/view_service.html', context)
+
+
+@login_required(login_url="login")
+def delete_opening_hour(request, pk):
+    opening_hour = get_object_or_404(ServiceProviderOpeningHours, pk=pk)
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
+    if opening_hour.service_provider == service_provider:
+        print("törlésre jogosult")
+        opening_hour.delete()
+        messages.success(request, "Nyitva tartás törölve")
+
+    else:
+        print("not torles")
+        messages.warning(request, "Nincs jogosultsága a törléshez")
+    return redirect('service_settings')
+
+
+def settings_opening_hours(request):
+    pass

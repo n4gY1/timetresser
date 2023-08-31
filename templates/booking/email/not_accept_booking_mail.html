@@ -1,0 +1,22 @@
+{% autoescape off %}
+
+
+Tisztelt {{booking.booked_user.get_name}}!
+Sajnáljuk, a foglalását a {{booking.service.name}} törölte. Az alábbi részletek:
+
+Időpont: {{booking.start_time}}
+
+Az ön megjegyzése:
+{{booking.description}}
+
+Az üzlet megjegyzése:
+
+{{booking.accept_description}}
+
+
+
+{{current_site}}
+
+
+
+{% endautoescape %}

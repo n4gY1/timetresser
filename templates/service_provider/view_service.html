@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+{% load tz %}
+{% block title %}Üzeletem beállításai{% endblock title %}
+
+
+{% block content_title %}{{obj.name}}{% endblock content_title %}
+
+{% block content %}
+
+<div class="text-center">
+    <img src="{{obj.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar-wide">
+    <hr>
+    <h3 class="text-light">{{obj.name}}</h3>
+    <h5 class="small text-info">{{obj.user_profile.get_name}}</h5>
+    <hr>
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <h5 class="text-light">Névjegy</h5>
+        <div class="row">
+            <div class="col-2"><i class="fa-regular fa-user"></i></div>
+            <div class="col-10"><div class="text-light">{{obj.name}}</div></div>
+        </div>
+        <div class="row">
+            <div class="col-2"><i class="fa-solid fa-house"></i></div>
+            <div class="col-10">{{obj.state}}, {{obj.zip_code}}, {{obj.city}} {{obj.street}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <div class="col-10">{{obj.mobile}}</div>
+        </div>
+        <div class="row">
+            <div class="col-2"><i class="fa-regular fa-comment"></i></div>
+            <div class="col-10">{{obj.description}}</div>
+        </div>
+        <div class="row">
+            <div class="col-2"><i class="fa-solid fa-wallet"></i></div>
+            <div class="col-10">{{obj.prices}}</div>
+        </div>
+
+        <hr>
+        <h5 class="text-light">Nyitva tartás</h5>
+        <div class="row">
+            <div class="col-4 text-light">Nap</div>
+            <div class="col-4 text-light"><b>Nyitás</b></div>
+            <div class="col-4 text-light"><b>Zárás</b></div>
+        </div>
+        <div class="row">
+            {% for open in open_hours %}
+                <div class="col-4">{{open.get_day_display}}</div>
+                <div class="col-4">{{open.start_time}}</div>
+                <div class="col-4">{{open.end_time}}</div>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+
+
+    </div>
+
+
+
+    
+    <div class="col-md-6">
+        <div class="text-center"><span class="badge bg-info text-light w-100 py-2 my-2">foglalható időpontok</span></div>
+        <p class="text-center">Kérjük, vegyék figyelembe, hogy a foglalási idő ablak {{obj.booking_time_interval}} perc. Ha nincs egymást követő szabad időpont, akkor ha az
+            időablaknál több időre van szüksége, lehetséges hogy az időpont el lesz halasztva vagy módosítási igénnyel fognak élni</p>
+        <hr>
+        {% localtime on %}
+            {% for day in free_times %}
+                <div class="row">
+                    <div class="col"><h3 class="text-light">{{day.day|date:"M d, l"}}</h3></div>
+                    <div class="col-auto text-end text-info"><b>Nyitva tartás:</b> {{day.opening|time:'H:i'}} - {{day.closing|time:'H:i'}}</div>
+                </div>
+
+
+
+                {% for t in day.free_times %}
+                    <!-- %Y-%m-%d %H:%M:%S -->
+                    <a href="{% url 'add_booking' obj.slug t|date:'Y-m-d H:i:s' %}">
+                        <span class="badge bg-warning text-primary my-1 p-2">{{t.hour}} óra {% if t.minute != 0 %} {{t.minute}} perc {% endif %}</span>
+                    </a>
+                {% endfor %}
+                <hr>
+            {% endfor %}
+
+        {% endlocaltime %}
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

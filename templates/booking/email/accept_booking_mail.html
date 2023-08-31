@@ -1,0 +1,23 @@
+{% autoescape off %}
+
+
+Tisztelt {{booking.booked_user.get_name}}!
+A foglalását a {{booking.service.name}} elfogadta. Az alábbi részletek:
+
+Időpont: {{booking.start_time}}
+Vége: {{booking.end_time}}
+Időtartam: {{booking.length}}
+Az ön megjegyzése:
+{{booking.description}}
+
+Az üzlet megjegyzése
+
+{{booking.accept_description}}
+
+Kérjük a megjelölt időpontban pontosan jelenjen meg. A weboldalon a "Profilom" menüpont alatt a foglalásait megtekintheti
+
+{{current_site}}
+
+
+
+{% endautoescape %}

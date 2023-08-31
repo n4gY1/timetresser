@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Üzeletem beállításai{% endblock title %}
+
+
+{% block content_title %}A tervezett foglalás időpontja: {{selected_date}}{% endblock content_title %}
+
+{% block content %}
+<p class="text-center small">
+    Szabad időpontok a jelenlegi fodrásznál. Kérjük vegye figyelembe, hogy a foglalást követően a fodrász a leírtak
+    alapján ha lehetséges jóváhagyja az időpontot a saccolt időtartam alapján. Így lehetséges, hogy más időponttal ütközne.
+    A foglalás után a jóváhagyásról e-mail értesítőt küldünk a regisztrált email címre, illetve információt, ha pontosítás történik.
+
+    Csak a jóváhagyott időpont foglalás valósul tényleges foglalásnak.
+</p>
+<hr>
+    <p class="text-center small">FOGLALÁS IDŐPONTJA</p>
+    <h5 class="text-center"><span class="badge bg-warning text-dark">{{selected_date}}</span></h5>
+    <h5 class="text-center text-light">{{service.name}}</h5>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="hidden" name="selected_date" id="id_selected_date" value="{{selected_date|date:'Y-m-d'}} {{selected_date|time:'H:i:s'}}">
+        <button type="submit" class="btn btn-success w-100 my-2">Foglalás elküldése</button>
+    </form>
+
+{% endblock content%}

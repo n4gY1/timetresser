@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Foglalás elfogadása{% endblock title %}
+
+
+{% block content_title %}A tervezett foglalás megtekintése és elfogadása: {{selected_date}}{% endblock content_title %}
+
+{% block script %}
+<script type="text/javascript">
+    const checkbox = document.getElementById('id_is_accept');
+    const sendButton = document.getElementById('submit');
+
+    function ClickCheckBox() {
+        if (checkbox.checked) {
+            sendButton.classList.remove('btn-danger');
+            sendButton.classList.add('btn-success');
+            sendButton.innerHTML = "Foglalás elfogadása";
+        }
+        else {
+            sendButton.classList.remove('btn-success');
+            sendButton.classList.add('btn-danger');
+            sendButton.innerHTML = "Foglalás törlése";
+        }
+    }
+</script>
+
+{% endblock script %}
+{% block content %}
+
+<hr>
+<p class="text-center small">FOGLALÁS IDŐPONTJA</p>
+<h5 class="text-center"><span class="badge bg-warning text-dark">{{booking.start_time|time:'H:i'}}</span></h5>
+<h5 class="text-center text-light">{{booking.service.name}}</h5>
+
+
+<hr>
+<div class="text-light">Foglaláshoz közeli időpontok</div>
+{% for neighbor_booking in neighbor_bookings %}
+    <span class="badge bg-info text-light ">
+        {{neighbor_booking.booked_user.get_name }} |
+        {{neighbor_booking.start_time|time:'H'}}{% if neighbor_booking.start_time.minute != 0 %}:{{neighbor_booking.start_time.minute}}{% endif %} -
+        {{neighbor_booking.end_time|time:'H'}}{% if neighbor_booking.end_time.minute != 0 %}:{{neighbor_booking.end_time.minute}}{% endif %}
+    </span>
+{% endfor %}
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    {% if form.is_accept.value %}
+    <button type="submit" id="submit" class="btn btn-success w-100 my-2">Foglalás elfogadása</button>
+    {% else %}
+
+    <button type="submit" id="submit" class="btn btn-danger w-100 my-2">Foglalás törlése</button>
+    {% endif %}
+</form>
+
+{% endblock content%}
