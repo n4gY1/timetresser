@@ -15,7 +15,38 @@
     <h5 class="small text-info">{{obj.user_profile.get_name}}</h5>
     <hr>
 </div>
+
+
+
 <div class="row">
+     <div class="col-md-6">
+        <div class="text-center"><span class="badge bg-info text-light w-100 py-2 my-2">foglalható időpontok</span></div>
+        <p class="text-center">Kérjük, vegyék figyelembe, hogy a foglalási idő ablak {{obj.booking_time_interval}} perc. Ha nincs egymást követő szabad időpont, akkor ha az
+            időablaknál több időre van szüksége, lehetséges hogy az időpont el lesz halasztva vagy módosítási igénnyel fognak élni</p>
+        <hr>
+        {% localtime on %}
+            {% for day in free_times %}
+                <div class="row">
+                    <div class="col"><h3 class="text-light">{{day.day|date:"M d, l"}}</h3></div>
+                    <div class="col-auto text-end text-info"><b>Nyitva tartás:</b> {{day.opening|time:'H:i'}} - {{day.closing|time:'H:i'}}</div>
+                </div>
+
+
+
+                {% for t in day.free_times %}
+                    <!-- %Y-%m-%d %H:%M:%S -->
+                    <a href="{% url 'add_booking' obj.slug t|date:'Y-m-d H:i:s' %}">
+                        <span class="badge bg-warning text-primary my-1 p-2">{{t.hour}} óra {% if t.minute != 0 %} {{t.minute}} perc {% endif %}</span>
+                    </a>
+                {% endfor %}
+                <hr>
+            {% endfor %}
+
+        {% endlocaltime %}
+    </div>
+
+
+
 
     <div class="col-md-6">
         <h5 class="text-light">Névjegy</h5>
@@ -41,6 +72,9 @@
             <div class="col-10">{{obj.prices}}</div>
         </div>
 
+
+
+
         <hr>
         <h5 class="text-light">Nyitva tartás</h5>
         <div class="row">
@@ -56,40 +90,66 @@
             {% endfor %}
         </div>
 
+
         <hr>
+        <h5 class="text-light">Referencia képek</h5>
+        <div class="row">
+            {% for picture in refer_pictures %}
+                <div class="col-md-4 col-6 mb-2">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{picture.image.url}}" alt="" class="card-pict">
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <hr>
+        <h5 class="text-light">Vélemények</h5>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{rating_form}}
+            <button type="submit" class="btn btn-success my-2 w-100">Mentés</button>
+        </form>
+
+        <div class="row ">
+            <div class="col-12">
+            {% for rating in ratings %}
+                <div class="card bg-primary mb-2">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-md-3"><img src="{{rating.user_profile.profile_picture.url}}" class="avatar-mini"></div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-auto text-light">{{rating.user_profile.get_name}}</div>
+                                    <div class="col text-end">{% autoescape off %}{{rating.get_rating_stars}}{% endautoescape %}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">{{rating.description}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        {{rating.created_at|timesince}}
+                    </div>
+                </div>
+            {% empty %}
+                <h5 class="text-center text-dark">Nincsenek vélemények</h5>
+            {% endfor %}
+            </div>
 
 
+        </div>
 
     </div>
 
 
 
     
-    <div class="col-md-6">
-        <div class="text-center"><span class="badge bg-info text-light w-100 py-2 my-2">foglalható időpontok</span></div>
-        <p class="text-center">Kérjük, vegyék figyelembe, hogy a foglalási idő ablak {{obj.booking_time_interval}} perc. Ha nincs egymást követő szabad időpont, akkor ha az
-            időablaknál több időre van szüksége, lehetséges hogy az időpont el lesz halasztva vagy módosítási igénnyel fognak élni</p>
-        <hr>
-        {% localtime on %}
-            {% for day in free_times %}
-                <div class="row">
-                    <div class="col"><h3 class="text-light">{{day.day|date:"M d, l"}}</h3></div>
-                    <div class="col-auto text-end text-info"><b>Nyitva tartás:</b> {{day.opening|time:'H:i'}} - {{day.closing|time:'H:i'}}</div>
-                </div>
-
-
-
-                {% for t in day.free_times %}
-                    <!-- %Y-%m-%d %H:%M:%S -->
-                    <a href="{% url 'add_booking' obj.slug t|date:'Y-m-d H:i:s' %}">
-                        <span class="badge bg-warning text-primary my-1 p-2">{{t.hour}} óra {% if t.minute != 0 %} {{t.minute}} perc {% endif %}</span>
-                    </a>
-                {% endfor %}
-                <hr>
-            {% endfor %}
-
-        {% endlocaltime %}
-    </div>
 
 </div>
 

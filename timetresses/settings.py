@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account',
     'booking',
     'service_provider',
+    'rating',
 
 ]
 

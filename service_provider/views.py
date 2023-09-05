@@ -9,6 +9,8 @@ from django.utils import timezone
 
 from account.models import UserProfile
 from booking.models import Booking
+from rating.forms import RatingForm
+from rating.models import Rating
 from service_provider.forms import ServiceProviderForm, ServiceProviderOpeningHoursForm, ServiceProviderPictureForm
 from service_provider.models import ServiceProvider, ServiceProviderOpeningHours, ServiceProviderPicture
 
@@ -111,6 +113,15 @@ def view_service(request, service_slug):
     two_day_later = current_date + datetime.timedelta(days=2)  # 2 nap múlva
     # igazából a holnapi nap
 
+    # referencia képek
+    refer_pictures = obj.refer_pictures.all()
+
+    # szavazások
+    ratings = obj.service_ratings.all().order_by('-created_at')
+
+    # rating form
+    rating_form = RatingForm()
+
     max_booking_date = obj.booking_date_nr
     max_time_interval = obj.booking_time_interval
 
@@ -160,10 +171,39 @@ def view_service(request, service_slug):
 
     open_hours = obj.opening.all().order_by("day")
 
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user_profile = get_object_or_404(UserProfile, user=request.user)
+            try:
+                exist_obj = Rating.objects.get(user_profile=user_profile, service_provider=obj)
+                rating_form = RatingForm(request.POST, instance=exist_obj)
+                if rating_form.is_valid():
+                    rating_form.save()
+                    messages.success(request,"Vélemény módosítása sikeres")
+                    rating_form = RatingForm()
+            except Exception as e:
+                rating_form = RatingForm(request.POST)
+                print(e)
+                if rating_form.is_valid():
+                    f = rating_form.save(commit=False)
+                    f.user_profile = user_profile
+                    f.service_provider = obj
+                    f.save()
+                    rating_form = RatingForm()
+                    messages.success(request,"Vélemény rögzítése sikeres")
+                else:
+                    print(rating_form.errors)
+
+        else:
+            messages.success(request, "Véleményt csak bejelentkezett felhasználó rögzíthet")
+
     context = {
         "obj": obj,
         "open_hours": open_hours,
         "free_times": free_times,
+        "refer_pictures": refer_pictures,
+        "ratings": ratings,
+        "rating_form": rating_form
     }
     return render(request, 'service_provider/view_service.html', context)
 
@@ -194,7 +234,7 @@ def settings_refer_picture(request):
     refer_picture_form = ServiceProviderPictureForm()
 
     if request.method == 'POST':
-        refer_picture_form = ServiceProviderPictureForm(request.POST,request.FILES)
+        refer_picture_form = ServiceProviderPictureForm(request.POST, request.FILES)
         if refer_picture_form.is_valid():
             obj = refer_picture_form.save(commit=False)
             obj.service_provider = service_provider
@@ -211,14 +251,14 @@ def settings_refer_picture(request):
 
 
 @login_required(login_url="login")
-def delete_refer_picture(request,pk):
+def delete_refer_picture(request, pk):
     user = request.user
     user_profile = get_object_or_404(UserProfile, user=user)
     service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
-    picture = get_object_or_404(ServiceProviderPicture,pk=pk)
+    picture = get_object_or_404(ServiceProviderPicture, pk=pk)
     if picture.service_provider.user_profile == user_profile:
         picture.delete()
-        messages.success(request,"Kép sikeresen törölve")
+        messages.success(request, "Kép sikeresen törölve")
     else:
-        messages.warning(request,"Nincs jogosultsága a kép törléséhez")
+        messages.warning(request, "Nincs jogosultsága a kép törléséhez")
     return redirect('settings_refer_picture')
