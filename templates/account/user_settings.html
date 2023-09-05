@@ -43,9 +43,9 @@
 
         {% for booking in bookings %}
             <div class="row">
-                <div class="col-12">
-                    <span class="badge bg-dark">
-                    {{booking.start_time|date:'Y-m-d H'}}
+                <div class="col-auto">
+                    <span class="badge bg-dark text-light">
+                    {{booking.start_time|date:'Y.m.d H'}}
                     {%if booking.start_time.minute != 0 %}: {{booking.start_time.minute}}{% endif %}
                     -
                     {{booking.end_time|time:'H'}}
@@ -53,10 +53,22 @@
                     </span>
                 </div>
 
+                <div class="col text-end">
+                    <span class="badge bg-primary">
+                    {% if booking.is_accept %}<i class="fa-solid fa-check text-success"></i>
+                        {% else %}<i class="fa-solid fa-xmark text-danger "></i>
+                    {%endif%}
+                    {{booking.service.name}}
+                    </span>
+                </div>
 
-                <div class="col">{{booking.description}}</div>
-                <div class="col-md-4 {% if booking.is_accept %}text-success{% else %}text-danger{%endif%}">{{booking.accept_description}}</div>
-                <div class="col-auto">{% if booking.is_accept %}<i class="fa-solid fa-check text-success"></i>{% else %}<i class="fa-solid fa-xmark text-danger"></i>{%endif%}</div>
+
+            </div>
+            <div class="row">
+                <div class="col-12">{{booking.description}}</div>
+                <div class="col-12 {% if booking.is_accept %} text-success {% else %} text-danger {% endif %}">{{booking.accept_description}}</div>
+
+
                 <hr>
             </div>
 

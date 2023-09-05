@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% load tz %}
+{% block title %}Referencia képek{% endblock title %}
+
+
+{% block content_title %}Üzletem referencia képei{% endblock content_title %}
+
+{% block content %}
+<div class="row">
+    {% for picture in refer_pictures %}
+        <div class="col-md-3 mb-2">
+            <div class="card bg-primary">
+                <div class="card-image">
+                    <img src="{{ picture.image.url }}" class="card-pict"/>
+                </div>
+                <div class="card-footer text-center"><a href="{% url 'delete_refer_picture' picture.pk %}" class=""><i class="fa-solid fa-trash-can text-danger"></i></a> </div>
+            </div>
+        </div>
+    {% empty %}
+    <h3 class="text-center">Nincsenek feltöltött referencia képek</h3>
+    {% endfor %}
+    
+</div>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="btn btn-success w-100 mt-2">Feltöltés</button>
+</form>
+
+
+
+{% endblock content %}

@@ -1,6 +1,6 @@
 from django import forms
 
-from service_provider.models import ServiceProvider, ServiceProviderOpeningHours
+from service_provider.models import ServiceProvider, ServiceProviderOpeningHours, ServiceProviderPicture
 
 
 class ServiceProviderForm(forms.ModelForm):
@@ -33,5 +33,16 @@ class ServiceProviderOpeningHoursForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ServiceProviderOpeningHoursForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control bg-primary text-light'
+
+
+class ServiceProviderPictureForm(forms.ModelForm):
+    class Meta:
+        model = ServiceProviderPicture
+        fields = ['image',]
+
+    def __init__(self, *args, **kwargs):
+        super(ServiceProviderPictureForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control bg-primary text-light'

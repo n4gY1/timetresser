@@ -111,8 +111,8 @@ def settings(request):
     context = {
         "form": form,
         "user_profile": user_profile,
-        "bookings":bookings,
-        "accept_bookings":accept_bookings
+        "bookings": bookings,
+        "accept_bookings": accept_bookings
     }
 
     return render(request, 'account/user_settings.html', context)

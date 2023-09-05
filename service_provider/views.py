@@ -9,8 +9,8 @@ from django.utils import timezone
 
 from account.models import UserProfile
 from booking.models import Booking
-from service_provider.forms import ServiceProviderForm, ServiceProviderOpeningHoursForm
-from service_provider.models import ServiceProvider, ServiceProviderOpeningHours
+from service_provider.forms import ServiceProviderForm, ServiceProviderOpeningHoursForm, ServiceProviderPictureForm
+from service_provider.models import ServiceProvider, ServiceProviderOpeningHours, ServiceProviderPicture
 
 import pytz
 
@@ -49,15 +49,14 @@ def service_settings(request):
         form = ServiceProviderForm(request.POST, request.FILES, instance=service_provider)
         opening_hour_form = ServiceProviderOpeningHoursForm(request.POST)
         if form.is_valid():
-
             form.save()
             messages.success(request, "Módosítás sikeres")
 
         if opening_hour_form.is_valid():
             day = opening_hour_form.cleaned_data['day']
-            start_ime = opening_hour_form.cleaned_data['start_time'] # 7:50
+            start_ime = opening_hour_form.cleaned_data['start_time']  # 7:50
             end_time = opening_hour_form.cleaned_data['end_time']
-            print(start_ime,type(start_ime))
+            print(start_ime, type(start_ime))
 
             opening_day = ServiceProviderOpeningHours.objects.filter(
                 day=day, service_provider=service_provider)
@@ -186,5 +185,40 @@ def delete_opening_hour(request, pk):
     return redirect('service_settings')
 
 
-def settings_opening_hours(request):
-    pass
+@login_required(login_url="login")
+def settings_refer_picture(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
+
+    refer_picture_form = ServiceProviderPictureForm()
+
+    if request.method == 'POST':
+        refer_picture_form = ServiceProviderPictureForm(request.POST,request.FILES)
+        if refer_picture_form.is_valid():
+            obj = refer_picture_form.save(commit=False)
+            obj.service_provider = service_provider
+            obj.save()
+            messages.success(request, "Kép feltöltése sikeres")
+
+    refer_pictures = service_provider.refer_pictures.all()
+
+    context = {
+        "refer_pictures": refer_pictures,
+        "form": refer_picture_form,
+    }
+    return render(request, 'service_provider/refer_pictures.html', context)
+
+
+@login_required(login_url="login")
+def delete_refer_picture(request,pk):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
+    picture = get_object_or_404(ServiceProviderPicture,pk=pk)
+    if picture.service_provider.user_profile == user_profile:
+        picture.delete()
+        messages.success(request,"Kép sikeresen törölve")
+    else:
+        messages.warning(request,"Nincs jogosultsága a kép törléséhez")
+    return redirect('settings_refer_picture')

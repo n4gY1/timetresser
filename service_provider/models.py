@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 
+
 from account.models import UserProfile
 
 SERVICE_TYPE = (
@@ -56,7 +57,7 @@ class ServiceProvider(models.Model):
 
 
 class ServiceProviderPicture(models.Model):
-    service_provider = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE)
+    service_provider = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE,related_name="refer_pictures")
     image = models.ImageField(upload_to='service_providers_pictures')
 
 

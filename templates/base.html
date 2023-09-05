@@ -15,11 +15,27 @@
     <link rel="icon" type="image/x-icon"  href="{% static 'img/favicon.png' %}">
 
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 
 
 </head>
 <body>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+            const scrollPosition = document.body.scrollHeight / 8;
+
+            window.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
+            });
+        },600);
+
+    })
+</script>
+
 
 {% include 'includes/navbar.html' %}
 
