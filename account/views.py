@@ -100,6 +100,7 @@ def settings(request):
 
     bookings = user_profile.my_bookings.all().order_by('-start_time')
     accept_bookings = bookings.filter(is_accept=True).order_by('start_time')
+    my_ratings = user_profile.my_ratings.all()
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
@@ -112,7 +113,8 @@ def settings(request):
         "form": form,
         "user_profile": user_profile,
         "bookings": bookings,
-        "accept_bookings": accept_bookings
+        "accept_bookings": accept_bookings,
+        "my_ratings":my_ratings
     }
 
     return render(request, 'account/user_settings.html', context)

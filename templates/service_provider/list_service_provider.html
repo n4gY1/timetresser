@@ -15,7 +15,11 @@
             <div class="card bg-primary text-light">
                 <div><a href="{% url 'view_service' service_slug=obj.slug %}"><img src="{{obj.banner_picture.url}}" class="card-image"  alt="{{obj.name}} banner"></a></div>
                 <div class="card-body">
-                    <p class="small"><a class="text-light" href="{% url 'view_service' obj.slug %}">{{obj.name}}</a></p>
+                    <div class="row">
+                        <div class="col-xl-7"><p class="small"><a class="text-light" href="{% url 'view_service' obj.slug %}">{{obj.name}}</a></p></div>
+                        <div class="col-xl-5">{% autoescape off %}{{obj.show_rating_stars}}{% endautoescape %} <small class="text-info" style="font-size:9px"> ({{obj.service_ratings.count}} vélemény)</small></div>
+                    </div>
+
                     <span class="badge bg-dark">{{obj.user_profile.get_name}}</span>
                 </div>
                 <div class="card-header small text-dark">{{obj.city}}</div>

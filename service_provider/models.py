@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-
+from django.db.models import Sum, Avg
 
 from account.models import UserProfile
 
@@ -54,6 +54,25 @@ class ServiceProvider(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_rating_value(self):
+        obj = ServiceProvider.objects.get(id=self.id)
+
+        avg = obj.service_ratings.all().aggregate(Avg('rate'))
+        avg = avg['rate__avg'] if avg['rate__avg'] is not None else 0
+        avg = int(avg)
+        return avg
+
+    def show_rating_stars(self):
+        html = ""
+        rating_value = self.get_rating_value()
+        for i in range(1, 6):
+            if i <= rating_value:
+                html += '<i class="fa-solid fa-star text-warning"></i>'
+            else:
+                html += '<i class="fa-solid fa-star"></i>'
+
+        return html
 
 
 class ServiceProviderPicture(models.Model):
