@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'timetresser'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34033D730934F7F94AAC814F3BD4FD7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FA662D9DF73F47C7BECB382E548322A1 }}
