@@ -6,3 +6,4 @@ python-dateutil==2.8.2
 python-slugify==8.0.1
 tzdata==2023.3
 gunicorn==21.0.1
+django-heroku==0.3.1
