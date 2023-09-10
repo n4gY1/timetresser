@@ -26,7 +26,7 @@ with open('.env') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['linker.redirectme.net','http://linker.redirectme.net']
+ALLOWED_HOSTS = ['timetresser.azurewebsites.net']
 
 AUTH_USER_MODEL = 'account.User'
 
