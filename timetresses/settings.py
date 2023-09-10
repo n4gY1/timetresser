@@ -19,19 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('.env') as f:
-
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*', 'localhost','127.0.0.1']
 
 AUTH_USER_MODEL = 'account.User'
-
-
-
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
@@ -141,7 +136,6 @@ if DEBUG:
 
 else:
     STATIC_ROOT = BASE_DIR / 'static'
-
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
