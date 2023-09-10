@@ -129,13 +129,11 @@ USE_I18N = True
 
 STATIC_URL = '/static/'
 
-if DEBUG:
-    STATICFILES_DIRS = [
-        'timetresses/static',
-    ]
+STATICFILES_DIRS = [
+    'timetresses/static',
+]
 
-else:
-    STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
