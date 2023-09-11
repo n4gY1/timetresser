@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'account.User'
 
@@ -122,4 +122,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if os.getcwd() == '/app':
-    DEBUG = False
+    DEBUG = True
