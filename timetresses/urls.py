@@ -24,7 +24,7 @@ from timetresses import settings
 urlpatterns = [
     path('', include('service_provider.urls')),
     path('booking/', include('booking.urls')),
-    path('admin/', admin.site.urls),
+    path('88nagy/', admin.site.urls),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('account/', include('account.urls')),
     path('rating/', include('rating.urls')),

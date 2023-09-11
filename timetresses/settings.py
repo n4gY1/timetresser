@@ -20,6 +20,9 @@ EMAIL_HOST_USER = 'hybasedev@gmail.com'
 EMAIL_HOST_PASSWORD = "sqgkyvqdqehyolpz"
 EMAIL_USE_TLS = True
 
+SECURE_SSL_REDIRECT = True
+
+
 # Application definition
 
 INSTALLED_APPS = [
