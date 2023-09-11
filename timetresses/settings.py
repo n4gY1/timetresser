@@ -1,11 +1,8 @@
-
 import os
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
@@ -13,7 +10,7 @@ SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['timetresser-198509e61e05.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'account.User'
 
@@ -36,9 +33,6 @@ INSTALLED_APPS = [
     'booking',
     'service_provider',
     'rating',
-
-
-    'storages'
 
 ]
 
@@ -119,10 +113,13 @@ STATICFILES_DIRS = [
     'timetresses/static',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if os.getcwd() == '/app':
+    DEBUG = False
