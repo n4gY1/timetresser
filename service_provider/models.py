@@ -9,6 +9,7 @@ SERVICE_TYPE = (
     ('salon', "Fodrászat"),
     ('nails', "Műkörmös"),
     ('solarium', "Szolárium"),
+    ('kozmetikus', "Kozmetikus"),
 )
 
 OPENING_HOURS_DAYS = (

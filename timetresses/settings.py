@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com']
+ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
 
 AUTH_USER_MODEL = 'account.User'
 
@@ -20,7 +20,7 @@ EMAIL_HOST_USER = 'hybasedev@gmail.com'
 EMAIL_HOST_PASSWORD = "sqgkyvqdqehyolpz"
 EMAIL_USE_TLS = True
 
-SECURE_SSL_REDIRECT = True
+
 
 
 # Application definition
@@ -132,3 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if os.getcwd() == '/app':
     DEBUG = False
+    SECURE_SSL_REDIRECT = True

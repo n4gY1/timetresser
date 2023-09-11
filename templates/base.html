@@ -39,6 +39,38 @@
 
 {% include 'includes/navbar.html' %}
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-primary">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">A regisztráció menete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light">
+        <p>
+            Üzlet regisztrációhoz az első lépés az, hogy regisztrál, mint felhasználó. Ilyenkor létre jön egy felhasználói fiók, amelyet hozzá tudok rendelni az üzletéhez.
+            Majd ez után, elküldi nekem a cége/üzlete nevét, pontos címét, telefonszámát, regisztrált felhasználó e-mail címét, üzlete leírását (ezeket a későbbiekben módosíthatja)
+            majd ez után én létre hozom az üzleti fiókját amely a felhasználói fiókjához csatlakozik. Ez után bejelentkezve már teljes körűen tudja használni.
+        </p>
+          <hr>
+          <p>Az adatokat a <a href="mailto:hybasedev@gmail.com" class="text-light">hybasedev@gmail.com</a> email címre küldje, illetve ha bármilyen kérdése van, azt ezen a címen felteheti.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Bezárás</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <div class="container" style="margin-top:10rem;">
     <div class="row">
         <div class="col-md-6">
@@ -47,12 +79,20 @@
             <p class="small"><em>A regisztráció gyors és egyszerű, az első hónap ingyenes majd havonta csupán 10.000ft
                 amely online fizethető. További rejtett költségek nincsenek</em></p>
             <p class="small"><em>Felhívjuk figyelmüket, hogy az üzleti regisztrációhoz mindenképpen szükséges a sima regisztráció is</em></p>
-            <a href="" class="btn btn-dark w-100">Üzleti Regisztráció</a>
+            <button href="" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Üzleti Regisztráció</button>
         </div>
         <div class="col-md-6"><img src="{% static 'img/main_banner.jpg' %}" alt="main banner" class="banner mt-2"></div>
     </div>
 
 </div>
+
+
+
+
+
+
+
+
 <div class="container">
 
         <hr>
