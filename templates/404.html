@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-ez nbem olyan nagy baj
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}ERROR 400{% endblock title %}
+
+{% block content_title %}A keresett oldal nem található{% endblock content_title %}
+
+
+{% block content %}
+<h2 class="text-center">Kérjük, térjen vissza a nyitó oldalra: <a href="{% url 'home' %}">Vissza</a></h2>
+{% endblock content %}

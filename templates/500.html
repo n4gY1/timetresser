@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-ez biza baj
-</body>
-</html>
+{% block title %}ERROR 500{% endblock title %}
+
+{% block content_title %}Szerver hiba történt, nincs jogosultsága vagy nem létező dolgot keresett{% endblock content_title %}
+
+
+{% block content %}
+<h2 class="text-center">Kérjük, térjen vissza a nyitó oldalra: <a href="{% url 'home' %}">Vissza</a></h2>
+{% endblock content %}
