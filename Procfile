@@ -1,1 +1,1 @@
-web: gunicorn timetresses.wsgi --log-file -
+web: gunicorn timetresses.wsgi --log-file-
