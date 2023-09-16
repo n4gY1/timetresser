@@ -15,7 +15,7 @@
 <form action="" method="post" class="form">
 
 {% csrf_token %}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalSettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-primary ">
       <div class="modal-header">
@@ -92,7 +92,7 @@
             <div class="col-1"><a href="{% url 'delete_opening_hour' open.pk %}" class=""><i class="fa-solid fa-trash-can text-danger"></i></a></div>
             {% endfor %}
         </div>
-        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModalSettings">
           Nyitva tartás módosítása
         </button>
 

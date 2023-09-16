@@ -65,6 +65,7 @@ def service_settings(request):
             if opening_day:
                 tmp = ServiceProviderOpeningHoursForm(request.POST, instance=opening_day[0])
                 tmp.save()
+                messages.success(request,"Nyitva tartás módosítása sikeres")
             else:
                 ServiceProviderOpeningHours.objects.create(
                     day=day,
@@ -72,6 +73,7 @@ def service_settings(request):
                     end_time=end_time,
                     service_provider=service_provider
                 )
+                messages.success(request, "Nyitva tartás rögzítése sikeres")
         return redirect('service_settings')
 
     if service_provider:
