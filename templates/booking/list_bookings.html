@@ -15,7 +15,7 @@
     <h2 class="alert bg-primary mt-2">{{obj.date}}</h2>
     {% for booking in obj.objs %}
         <a href="">
-            <span class="badge bg-dark">
+            <span class="badge bg-dark" title="{{booking.description}}">
                 {{booking.start_time|time:'H'}}
                 {%if booking.start_time.minute != 0 %}:{{booking.start_time.minute}}{% endif %}
                 -

@@ -40,6 +40,8 @@
                     </a>
                 {% endfor %}
                 <hr>
+            {% empty %}
+            <h5 class="bg-warning text-dark text-center p-2">Nincs feltöltve nyitva tartás, foglalás nem lehetséges</h5>
             {% endfor %}
 
         {% endlocaltime %}
@@ -111,6 +113,8 @@
                 <div class="col-4">{{open.get_day_display}}</div>
                 <div class="col-4">{{open.start_time}}</div>
                 <div class="col-4">{{open.end_time}}</div>
+            {%empty%}
+                <div class="col-12">Nincs feltöltve nyitva tartás</div>
             {% endfor %}
         </div>
 

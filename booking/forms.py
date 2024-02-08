@@ -4,7 +4,7 @@ from booking.models import Booking
 
 
 class BookingForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary', 'rows': 5}),
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 5}),
                                   label="Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását")
 
     class Meta:
@@ -14,15 +14,17 @@ class BookingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BookingForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control bg-primary'
+            field.widget.attrs['class'] = 'form-control bg-primary text-light'
 
 
 class BookingGuestForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary', 'rows': 5}),
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 5}),
                                   label="Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását")
     start_time = forms.DateTimeField(widget=forms.DateTimeInput(attrs={
         'class': 'form-control bg-primary', 'type': 'datetime-local'
     }), label='Kezdési időpont')
+
+    length = forms.IntegerField(max_value=300,min_value=10,label="Saccolt időtartam percben")
 
     class Meta:
         model = Booking
@@ -31,19 +33,20 @@ class BookingGuestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BookingGuestForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control bg-primary'
+            field.widget.attrs['class'] = 'form-control bg-primary text-light'
 
 
 class BookingManageForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary', 'rows': 3,
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 3,
                                                                'readonly': True}),
                                   label="Leírás")
 
-    accept_description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary', 'rows': 3}),
+    accept_description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light',
+                                                                      'rows': 3}),
                                          label="Hozzáfűzés")
 
     length = forms.IntegerField(widget=forms.NumberInput(attrs={'required': True, 'min': 10,
-                                                                'class': 'form-control bg-primary',
+                                                                'class': 'form-control bg-primary text-light',
                                                                 'placeholder': 'Saccolt időtartam percben'}),
                                 label="Időtartam percben")
 

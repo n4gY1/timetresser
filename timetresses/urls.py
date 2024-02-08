@@ -21,6 +21,7 @@ from django.views.static import serve
 
 from timetresses import settings
 
+
 urlpatterns = [
     path('', include('service_provider.urls')),
     path('booking/', include('booking.urls')),
@@ -28,6 +29,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('account/', include('account.urls')),
     path('rating/', include('rating.urls')),
+
 ]
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -94,7 +94,7 @@ def service_settings(request):
 
 
 def list_service_providers(request, serv_type):
-    objs = ServiceProvider.objects.filter(type=serv_type)
+    objs = ServiceProvider.objects.filter(type=serv_type,expired_date__gte=datetime.datetime.now())
     context = {
         "objs": objs,
 
@@ -106,7 +106,11 @@ def list_service_providers(request, serv_type):
 def view_service(request, service_slug):
     current_date = datetime.datetime.now(tz=pytz.timezone('Europe/Budapest'))
 
-    obj = ServiceProvider.objects.get(slug=service_slug, expired_date__gte=current_date)
+    try:
+        obj = ServiceProvider.objects.get(slug=service_slug, expired_date__gte=current_date)
+    except Exception as e:
+        messages.warning(request,"Nem található ilyen üzlet")
+        return redirect('home')
 
     current_date = datetime.datetime(year=current_date.year, month=current_date.month,
                                      day=current_date.day, hour=0, minute=0,

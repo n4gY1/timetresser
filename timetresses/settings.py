@@ -8,9 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
+# ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
+ALLOWED_HOSTS = ["HYBASE.WORK.GD", "localhost", "127.0.0.1",'*']
 
 AUTH_USER_MODEL = 'account.User'
 
@@ -19,9 +20,6 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'hybasedev@gmail.com'
 EMAIL_HOST_PASSWORD = "sqgkyvqdqehyolpz"
 EMAIL_USE_TLS = True
-
-
-
 
 # Application definition
 
@@ -37,6 +35,8 @@ INSTALLED_APPS = [
     'service_provider',
     'rating',
 
+    'django_extensions'
+
 ]
 
 MIDDLEWARE = [
@@ -45,14 +45,12 @@ MIDDLEWARE = [
 
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 
 ]
 
@@ -130,6 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if os.getcwd() == '/app':
-    DEBUG = False
-    SECURE_SSL_REDIRECT = True
+# if os.getcwd() == '/app':
+#    DEBUG = False
+#    SECURE_SSL_REDIRECT = True
