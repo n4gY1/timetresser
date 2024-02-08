@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'service_provider',
     'rating',
 
-    'django_extensions'
 
 ]
 
