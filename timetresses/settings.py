@@ -11,8 +11,8 @@ SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i
 DEBUG = False
 
 # ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
-ALLOWED_HOSTS = ["HYBASE.WORK.GD", "localhost", "127.0.0.1",'*']
-
+ALLOWED_HOSTS = ["idopontok.run.place", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://idopontok.run.place"]
 AUTH_USER_MODEL = 'account.User'
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -118,6 +118,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = "staticfiles/"
+#STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
 
 
 MEDIA_URL = '/media/'

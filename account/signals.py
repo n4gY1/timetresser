@@ -12,7 +12,8 @@ def delete_old_profile_picture(sender, instance, **kwargs):
         try:
             old_instance = UserProfile.objects.get(pk=instance.pk)
             if old_instance.profile_picture and old_instance.profile_picture != instance.profile_picture:
-                old_instance.profile_picture.delete(save=False)
+                if "def_prof.png" not in old_instance.profile_picture:
+                    old_instance.profile_picture.delete(save=False)
         except UserProfile.DoesNotExist:
             pass
 
