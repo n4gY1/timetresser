@@ -1,25 +1,45 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <title>MyTimes.hu - Bejelentkezés</title>
 
-{% block title %}Bejelentkezés{% endblock title %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 
-{% block content_title %}Bejelentkezés{% endblock content_title %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block content %}
-<form action="" class="form" method="post">
-    {% csrf_token %}
-    <label for="id_email">Email</label>
-    <input type="email" name="email" id="id_email" placeholder="email" class="form-control bg-primary text-light">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <label for="id_password" >Jelszó</label>
-    <input type="password" name="password" id="id_password" placeholder="Jelszó" class="form-control bg-primary text-light">
-    <button type="submit" class="btn w-100 btn-success my-2">Bejelentkezés</button>
-    <hr>
-    <p class="text-center">Nincs még felhasználói fiókja?</p>
-    <div class="text-center">
-         <a href="{% url 'register' %}" class="text-info">Regisztráció</a>
-    </div>
-
-</form>
+    <link rel="icon" type="image/x-icon"  href="{% static 'img/favicon.png' %}">
 
 
-{% endblock content %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+
+</head>
+<body style="height:100vh">
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div style="max-width:50rem; width:100%;">
+    <form action="" class="form" method="post">
+        {% csrf_token %}
+        <label for="id_email">Email</label>
+        <input type="email" name="email" id="id_email" placeholder="email" class="form-control bg-primary text-light">
+
+        <label for="id_password">Jelszó</label>
+        <input type="password" name="password" id="id_password" placeholder="Jelszó" class="form-control bg-primary text-light">
+
+        <button type="submit" class="btn w-100 btn-success my-2">Bejelentkezés</button>
+        <hr>
+        <p class="text-center">Nincs még felhasználói fiókja?</p>
+        <div class="text-center">
+            <a href="{% url 'register' %}" class="text-info">Regisztráció</a>
+        </div>
+    </form>
+  </div>
+</div>
+
+</body>

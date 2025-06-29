@@ -8,11 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
-ALLOWED_HOSTS = ["idopontok.run.place", "localhost", "127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://idopontok.run.place"]
+#ALLOWED_HOSTS = ["idopontok.run.place", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
+#CSRF_TRUSTED_ORIGINS = ["https://idopontok.run.place"]
 AUTH_USER_MODEL = 'account.User'
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -53,6 +54,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'timetresses.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,8 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'timetresses.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -84,8 +85,7 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

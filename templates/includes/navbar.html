@@ -1,4 +1,29 @@
-<nav class="navbar navbar-expand-xl bg-primary fixed-top" data-bs-theme="dark">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-primary">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">A regisztráció menete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light">
+        <p>
+            Üzlet regisztrációhoz az első lépés az, hogy regisztrál, mint felhasználó. Ilyenkor létre jön egy felhasználói fiók, amelyet hozzá tudok rendelni az üzletéhez.
+            Majd ez után, elküldi nekem a cége/üzlete nevét, pontos címét, telefonszámát, regisztrált felhasználó e-mail címét, üzlete leírását (ezeket a későbbiekben módosíthatja)
+            majd ez után én létre hozom az üzleti fiókját amely a felhasználói fiókjához csatlakozik. Ez után bejelentkezve már teljes körűen tudja használni.
+        </p>
+          <hr>
+          <p>Az adatokat a <a href="mailto:hybasedev@gmail.com" class="text-light">hybasedev@gmail.com</a> email címre küldje, illetve ha bármilyen kérdése van, azt ezen a címen felteheti.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Bezárás</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-xl sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">MyTimes.hu</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +68,11 @@
             <a class="dropdown-item" href="{% url 'list_accept_booking' %}">Foglalások megtekintése</a>
           </div>
         </li>
+        {% else %}
+        <!-- Cég regisztráció -->
+        <li class="nav-item  p-0 m-0">
+          <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Üzlet regisztráció</a>
+        </li>
         {% endif %}
 
         <!-- Hitelesített felhasználó menü -->
@@ -55,10 +85,13 @@
 
 
 
+
+
+
       </ul>
 
       <form class="d-flex">
-        <input class="form-control me-sm-2 bg-primary" type="search" placeholder="Search">
+        <input class="form-control me-sm-2 bg-light" type="search" placeholder="Search">
         <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
 

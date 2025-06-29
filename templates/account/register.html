@@ -1,20 +1,41 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <title>MyTimes.hu - Bejelentkezés</title>
 
-{% block title %}Regisztráció{% endblock title %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 
-{% block content_title %}Regisztráció{% endblock content_title %}
-{% block content %}
-<form action="" class="form" method="post">
-    {% csrf_token %}
-    {{form}}
-    <p class="py-2 text-center"><em>A regisztráció után egy megerősítő e-mailt küldünk amellyel a regisztráicó véglegesíthető</em></p>
-    <button type="submit" class="btn w-100 my-2 btn-success">Regisztráció</button>
-    <div class="text-center py-2">
-        <a  href="{% url 'login' %}" class="text-info">Van már fiókom, bejelentkezek</a>
-    </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-</form>
+    <link rel="icon" type="image/x-icon"  href="{% static 'img/favicon.png' %}">
 
 
-{% endblock content %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+
+</head>
+<body style="height:100vh">
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div style="max-width:50rem; width:100%;">
+    <form action="" class="form" method="post">
+        {% csrf_token %}
+        {{form}}
+        <p class="py-2 text-center"><em>A regisztráció után egy megerősítő e-mailt küldünk amellyel a regisztráicó véglegesíthető</em></p>
+        <button type="submit" class="btn w-100 my-2 btn-success">Regisztráció</button>
+        <div class="text-center py-2">
+            <a  href="{% url 'login' %}" class="text-info">Van már fiókom, bejelentkezek</a>
+        </div>
+
+
+    </form>
+  </div>
+</div>
+</body>
+
