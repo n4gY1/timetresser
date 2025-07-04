@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="text-center">
-    <img src="{{obj.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar-wide">
+    <img src="{{obj.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar">
     <hr>
     <h3 class="text-light">{{obj.name}}</h3>
     <h5 class="small text-info">{{obj.user_profile.get_name}}</h5>
@@ -21,8 +21,13 @@
 <div class="row">
      <div class="col-md-6">
         <div class="text-center"><span class="badge bg-info text-light w-100 py-2 my-2">foglalható időpontok</span></div>
-        <p class="text-center">Kérjük, vegyék figyelembe, hogy a foglalási idő ablak {{obj.booking_time_interval}} perc. Ha nincs egymást követő szabad időpont, akkor ha az
-            időablaknál több időre van szüksége, lehetséges hogy az időpont el lesz halasztva vagy módosítási igénnyel fognak élni</p>
+        <p class="text-center">
+            Kérjük, vegye figyelembe: Az időpontfoglalási rendszer alapértelmezés szerint {{obj.booking_time_interval}} perces időablakokkal dolgozik.
+            Mivel a szolgáltatások tényleges időtartama vendégenként eltérhet,
+            előfordulhat, hogy a lefoglalt időpont nem biztosít elegendő időt a szolgáltatás teljes elvégzéséhez.
+            Amennyiben nem áll rendelkezésre egymást követő szabad időpont, a lefoglalt időpont módosítása válhat szükségessé,
+            vagy időpont-eltolásra is sor kerülhet. Köszönjük megértését!
+        </p>
         <hr>
         {% localtime on %}
             {% for day in free_times %}
@@ -148,15 +153,19 @@
             {% for rating in ratings %}
                 <div class="card bg-primary mb-2">
                     <div class="card-body">
-                        <div class="row ">
-                            <div class="col-md-3"><img src="{{rating.user_profile.profile_picture.url}}" class="avatar-mini"></div>
+                        <div class="row">
+                           <div class="col-12 col-md-3 text-center mb-2 mb-md-0">
+                                <img src="{{rating.user_profile.profile_picture.url}}" class="avatar-mini rounded-circle">
+                            </div>
                             <div class="col-md-9">
                                 <div class="row">
-                                    <div class="col-md-auto text-light">{{rating.user_profile.get_name}}</div>
-                                    <div class="col text-end">{% autoescape off %}{{rating.get_rating_stars}}{% endautoescape %}</div>
+                                    <div class="col-12 col-md-auto text-light text-center text-md-start">{{rating.user_profile.get_name}}</div>
+                                    <div class="col-12 col-md text-center text-md-end">
+                                        {% autoescape off %}{{rating.get_rating_stars}}{% endautoescape %}
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">{{rating.description}}</div>
+                                    <div class="col text-info">{{rating.description}}</div>
                                 </div>
                             </div>
                         </div>

@@ -42,7 +42,11 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="" style="min-height:50vh;max-width:100%;object-fit:cover;background-position:center" src="{% static 'img/banner.png'%}" alt="Banner1">
+      <img class="" style="min-height:50vh;max-width:100%;object-fit:cover;background-position:center" src="{% static 'img/main_banner.jpg'%}" alt="Banner1">
+        <div class="banner-text-container">
+            <h1 class="slide-in-left text-light">MyTimes.hu</h1>
+            <h5 class="slide-in-right text-light">foglalj időpontot online</h5>
+        </div>
     </div>
   </div>
 </div>
@@ -53,11 +57,11 @@
 
 
 
-<div class="container" style="min-height:100vh;" >
+<div class="container-fluid" style="min-height:100vh;" >
 
-        <hr>
-        <div class="text-center text-warning text-uppercase"><p>{% block content_title %}{% endblock content_title%}</p></div>
-        <hr>
+        <!--
+        <div class="text-center text-light text-uppercase my-3 py-3 fs-1"><p>{% block content_title %}{% endblock content_title%}</p></div>
+        -->
         {% block content %}
 
         {% endblock content%}

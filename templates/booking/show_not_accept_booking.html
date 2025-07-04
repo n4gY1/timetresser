@@ -33,8 +33,10 @@
 <h5 class="text-center text-light">{{booking.service.name}}</h5>
 
 
-<hr>
+
+{% if neighbor_bookings %}
 <div class="text-light">Foglaláshoz közeli időpontok</div>
+{% endif %}
 {% for neighbor_booking in neighbor_bookings %}
     <span class="badge bg-info text-light ">
         {{neighbor_booking.booked_user.get_name }} |

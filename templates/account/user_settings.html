@@ -39,14 +39,18 @@
                     <div class="col-2 mt-1"><a href="{% url 'delete_my_rating' rating.pk %}" class=""><i class="fa-solid fa-trash-can text-danger"></i></a></div>
                 </div>
                 <div class="row ">
-                    <div class="col-md-3"><img src="{{rating.user_profile.profile_picture.url}}" class="avatar-mini"></div>
+                    <div class="col-12 col-md-3 text-center mb-2 mb-md-0">
+                                <img src="{{rating.user_profile.profile_picture.url}}" class="avatar-mini rounded-circle">
+                    </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-auto text-light">{{rating.user_profile.get_name}}</div>
-                            <div class="col text-end">{% autoescape off %}{{rating.get_rating_stars}}{% endautoescape %}</div>
+                            <div class="col-12 col-md-auto text-light text-center text-md-start">{{rating.user_profile.get_name}}</div>
+                                <div class="col-12 col-md text-center text-md-end">
+                                    {% autoescape off %}{{rating.get_rating_stars}}{% endautoescape %}
+                                </div>
                         </div>
                         <div class="row">
-                            <div class="col">{{rating.description}}</div>
+                            <div class="col text-info">{{rating.description}}</div>
                         </div>
                     </div>
                 </div>
@@ -54,7 +58,7 @@
             </div>
         </div>
         {% empty %}
-        <h5 class="text-center">Nincsenek vélemények</h5>
+        <h5 class="text-center text-info">Nincsenek vélemények</h5>
         {% endfor %}
 
     </div>

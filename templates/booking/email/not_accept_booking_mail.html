@@ -2,21 +2,24 @@
 
 
 Tisztelt {{booking.booked_user.get_name}}!
-Sajnáljuk, a foglalását a {{booking.service.name}} törölte. Az alábbi részletek:
+
+Foglalás törlése!
+
+Ez az üzenet a Mytimes.hu weboldal automatikusan generált értesítése,
+miszerint a foglalását a {{booking.service.name}} sajnálatosan NEM fogadta el.
+
+Tekintse meg az üzlet megjegyzését:
 
 Időpont: {{booking.start_time}}
 
+--------------------------------------------------------------
 Az ön megjegyzése:
 {{booking.description}}
-
+--------------------------------------------------------------
 Az üzlet megjegyzése:
-
 {{booking.accept_description}}
 
 
-
-{{current_site}}
-
-
+Kérjük, erre a levélre ne válaszoljon, ne küldjön üzenetet. Ez egy automatikusan generált levél!
 
 {% endautoescape %}

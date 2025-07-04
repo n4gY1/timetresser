@@ -27,9 +27,8 @@ def login(request):
 
             return redirect('home')
         else:
-            messages.success(request, "Sorry, not valid username and password or "
-                                      "not activated user")
-            print(email, password)
+            messages.success(request, "Hibás felhasználónév vagy jelszó, vagy a fiók még nincs megerősítve ")
+            #print(email, password)
             return redirect('login')
 
     return render(request, 'account/login.html')
@@ -59,7 +58,7 @@ def register(request):
 
                 send_verification_email(request, user)
 
-                messages.success(request, "Sikeres regisztráció. Megerősítő email elküldve")
+                messages.success(request, "A regisztráció sikeres. A megerősítő e-mailt elküldtük a megadott címre")
                 return redirect('login')
             else:
                 messages.warning(request, "A jelszavak nem egyeznek")
@@ -85,10 +84,10 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, 'Sikeres aktiválás')
+        messages.success(request, 'Sikeres aktiválás. Most már bejelentkezhet')
         return redirect('login')
     else:
-        messages.error(request, 'Nem érvényes a link')
+        messages.error(request, 'Ez az aktiváló link nem érvényes')
         return redirect('login')
 
 
@@ -106,7 +105,7 @@ def settings(request):
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "Sikeres mentés")
+            messages.success(request, "Beállítások mentése sikeres")
             return redirect('settings')
 
     context = {

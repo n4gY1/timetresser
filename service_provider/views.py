@@ -16,12 +16,22 @@ from service_provider.models import ServiceProvider, ServiceProviderOpeningHours
 
 import pytz
 
-from service_provider.utils import FreeBookingTimes
+from service_provider.utils import FreeBookingTimes, get_service_providers_sorted_by_user_bookings
 
 
 # Create your views here.
 def home(request):
-    objs = ServiceProvider.objects.filter(expired_date__gte=datetime.datetime.now())
+    #objs = ServiceProvider.objects.filter(expired_date__gte=datetime.datetime.now())
+    print(request.user)
+    if request.user.is_authenticated:
+        user_profile = get_object_or_404(UserProfile, user=request.user)
+        objs = get_service_providers_sorted_by_user_bookings(user_profile)
+    else:
+        objs = ServiceProvider.objects.filter(expired_date__gte=timezone.now())
+
+    if request.method == "GET" and request.GET.get('search'):
+        search_text = request.GET.get("search")
+        objs = objs.filter(city__contains=search_text) | objs.filter(name__contains=search_text)
     context = {
         "objs": objs
     }
@@ -33,6 +43,7 @@ def home(request):
 def service_settings(request):
     user = request.user
     user_profile = get_object_or_404(UserProfile, user=user)
+
 
     service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
     form = ServiceProviderForm(instance=service_provider)

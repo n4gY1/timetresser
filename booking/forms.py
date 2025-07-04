@@ -4,7 +4,7 @@ from booking.models import Booking
 
 
 class BookingForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 5}),
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 5,'placeholder':'Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását. Ha rendelkezik internetes képpel a célról, adja meg a kép elérhetőségét (linkjét)'}),
                                   label="Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását")
 
     class Meta:
@@ -19,7 +19,7 @@ class BookingForm(forms.ModelForm):
 
 class BookingGuestForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control bg-primary text-light', 'rows': 5}),
-                                  label="Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását")
+                                  label="Kérjük adja meg az igényelt szolgáltatás legpontosabb leírását.")
     start_time = forms.DateTimeField(widget=forms.DateTimeInput(attrs={
         'class': 'form-control bg-primary', 'type': 'datetime-local'
     }), label='Kezdési időpont')

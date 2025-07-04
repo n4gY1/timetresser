@@ -10,7 +10,7 @@ rating_value = (
     (2,'Tűrhető'),
     (3,'Átlagos'),
     (4,'Jó'),
-    (5,'Kiválló')
+    (5,'Kiváló')
 )
 
 class Rating(models.Model):

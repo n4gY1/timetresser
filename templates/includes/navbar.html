@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<nav class="navbar navbar-expand-xl sticky-top bg-light" data-bs-theme="light">
+<nav class="navbar navbar-expand-xl sticky-top bg-black" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">MyTimes.hu</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,17 +90,17 @@
 
       </ul>
 
-      <form class="d-flex">
-        <input class="form-control me-sm-2 bg-light" type="search" placeholder="Search">
-        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      <form class="d-flex" method="GET" action="{% url 'home' %}">
+        <input class="form-control me-sm-2 bg-black" type="search" name="search" id="search" placeholder="név vagy város">
+        <button class="btn btn-dark my-sm-0" type="submit" >Keresés</button>
       </form>
 
       <ul class="navbar-nav text-right">
 
         {% if request.user.is_authenticated %}
-        <li class="nav-item p-0 m-0"><a class="nav-link" href="{% url 'logout' %}">Kijelentkezés</a></li>
+        <li class="nav-item p-0 m-0"><a class="nav-link text-warning" href="{% url 'logout' %}">Kijelentkezés</a></li>
         {% else %}
-        <li class="nav-item p-0 m-0"><a  class="nav-link"  href="{% url 'login' %}">Bejelentkezés</a></li>
+        <li class="nav-item p-0 m-0"><a  class="nav-link text-warning"  href="{% url 'login' %}">Bejelentkezés</a></li>
         {% endif %}
       </ul>
 

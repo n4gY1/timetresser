@@ -44,14 +44,14 @@
     <img src="{{service_provider.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar-wide">
     <hr>
     <h3 class="text-light">{{service_provider.name}}</h3>
-    <h5 class="small text-dark">{{service_provider.user_profile.get_name}}</h5>
+    <h5 class="small text-info">{{service_provider.user_profile.get_name}}</h5>
     <hr>
 </div>
 <div class="row">
 
 
     <div class="col-md-6">
-        <span class="small"><em>Üzeletem törlése - Figyelem, a törlés végleges!</em></span>
+        <span class="small"><em>Üzletem törlése - Figyelem, a törlés végleges!</em></span>
         <a href="" class="btn btn-danger w-100">Üzletem törlése</a>
         <hr>
         <div class="row">
@@ -110,9 +110,6 @@
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-
-            {{form.name.label_tag}}
-            {{form.name}}
 
             {{form.name.label_tag}}
             {{form.name}}

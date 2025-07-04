@@ -27,7 +27,7 @@
     <form action="" class="form" method="post">
         {% csrf_token %}
         {{form}}
-        <p class="py-2 text-center"><em>A regisztráció után egy megerősítő e-mailt küldünk amellyel a regisztráicó véglegesíthető</em></p>
+        <p class="py-2 text-center"><em>A regisztrációt követően egy megerősítő e-mailt küldünk, amelyben található hivatkozás segítségével véglegesítheti fiókját</em></p>
         <button type="submit" class="btn w-100 my-2 btn-success">Regisztráció</button>
         <div class="text-center py-2">
             <a  href="{% url 'login' %}" class="text-info">Van már fiókom, bejelentkezek</a>
@@ -37,5 +37,6 @@
     </form>
   </div>
 </div>
+{% include 'includes/alert.html' %}
 </body>
 

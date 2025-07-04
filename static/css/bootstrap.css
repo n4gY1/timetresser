@@ -39,7 +39,7 @@
   --bs-gray-900: #1a1a1a;
   --bs-primary: #1a1a1a;
   --bs-secondary: #fff;
-  --bs-success: #4bbf73;
+  --bs-success: #62BF4B;
   --bs-info: #1f9bcf;
   --bs-warning: #f0ad4e;
   --bs-danger: #d9534f;
@@ -47,9 +47,9 @@
   --bs-dark: #1d1936;
   --bs-primary-rgb: 19, 17, 34;
   --bs-secondary-rgb: 255, 255, 255;
-  --bs-success-rgb: 75, 191, 115;
+  --bs-success-rgb: 98, 191, 75;
   --bs-info-rgb: 31, 155, 207;
-  --bs-warning-rgb: 240, 173, 78;
+  --bs-warning-rgb: 255, 215, 00;
   --bs-danger-rgb: 217, 83, 79;
   --bs-light-rgb: 255, 255, 255;
   --bs-dark-rgb: 29, 25, 54;
@@ -4739,7 +4739,7 @@ textarea.form-control-lg {
 
 .alert-success {
   --bs-alert-color: var(--bs-success-text-emphasis);
-  --bs-alert-bg: var(--bs-success-bg-subtle);
+  --bs-alert-bg: var(--bs-success);
   --bs-alert-border-color: var(--bs-success-border-subtle);
   --bs-alert-link-color: var(--bs-success-text-emphasis);
 }

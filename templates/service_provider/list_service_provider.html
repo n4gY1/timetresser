@@ -11,18 +11,25 @@
 
 <div class="row m-0">
     {% for obj in objs %}
-        <div class="col-lg-4 my-2">
-            <div class="card bg-dark text-light">
+        <div class="col-lg-3 my-2 d-flex align-items-stretch">
+            <div class="card bg-dark text-light w-100">
                 <div><a href="{% url 'view_service' service_slug=obj.slug %}"><img src="{{obj.banner_picture.url}}" class="card-image"  alt="{{obj.name}} banner"></a></div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-7"><p class="small"><a class="text-light" href="{% url 'view_service' obj.slug %}">{{obj.name}}</a></p></div>
-                        <div class="col-xl-5">{% autoescape off %}{{obj.show_rating_stars}}{% endautoescape %} <small class="text-info" style="font-size:9px"> ({{obj.service_ratings.count}} vélemény)</small></div>
+                    <div class="">{% autoescape off %}{{obj.show_rating_stars}}{% endautoescape %} <small class="text-info" style="font-size:9px"> ({{obj.service_ratings.count}} vélemény)</small></div>
+                    <div class="">
+                        <p class="small">
+                            <a class="link-warning text-uppercase link-underline-opacity-0" href="{% url 'view_service' obj.slug %}">{{obj.name}}</a>
+                            <span class="badge bg-primary">{{obj.user_profile.get_name}}</span>
+                        </p>
+                        <div class="small">
+                            {{obj.description | truncatechars:"200" }}
+                        </div>
+
+
                     </div>
 
-                    <span class="badge bg-primary">{{obj.user_profile.get_name}}</span>
                 </div>
-                <div class="card-header small text-dark">{{obj.city}}</div>
+                <div class="card-header small text-info">{{obj.city}}</div>
             </div>
         </div>
     {% empty %}
