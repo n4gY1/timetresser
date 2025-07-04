@@ -8,14 +8,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
 #ALLOWED_HOSTS = ["idopontok.run.place", "localhost", "127.0.0.1"]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["mytimes.hu", "localhost", "127.0.0.1"]
+#ALLOWED_HOSTS = ["*"]
 #CSRF_TRUSTED_ORIGINS = ["https://idopontok.run.place"]
 AUTH_USER_MODEL = 'account.User'
-
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1","https://mytimes.hu"]
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'hybasedev@gmail.com'
