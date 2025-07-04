@@ -118,7 +118,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-STATIC_ROOT = "staticfiles/"
+#STATIC_ROOT = "staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 #STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
 
 
