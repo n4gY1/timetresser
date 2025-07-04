@@ -113,10 +113,7 @@ TIME_ZONE = 'Europe/Budapest'
 USE_I18N = True
 
 STATIC_URL = 'static/'
-
-
-#STATIC_ROOT = "staticfiles/"
-STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [BASE_DIR / "static",]
 
 #STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
 
