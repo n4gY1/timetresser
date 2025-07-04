@@ -114,9 +114,6 @@ USE_I18N = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
 
 #STATIC_ROOT = "staticfiles/"
 STATIC_ROOT = BASE_DIR / 'static'
