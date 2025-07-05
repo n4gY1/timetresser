@@ -19,8 +19,8 @@ AUTH_USER_MODEL = 'account.User'
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1","https://mytimes.hu"]
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'hybasedev@gmail.com'
-EMAIL_HOST_PASSWORD = "sqgkyvqdqehyolpz"
+EMAIL_HOST_USER = 'mytimesdev@gmail.com'
+EMAIL_HOST_PASSWORD = "izuznwjcalojwcbi"
 EMAIL_USE_TLS = True
 
 # Application definition
