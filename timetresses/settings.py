@@ -113,10 +113,10 @@ TIME_ZONE = 'Europe/Budapest'
 USE_I18N = True
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "static",]
+#STATICFILES_DIRS = [BASE_DIR / "static",]
 
 #STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
-STATIC_ROOT = "/home/ubuntu/timetresser/staticfiles" #hogy ennek van e köze hozzá????
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles') #hogy ennek van e köze hozzá????
 
 
 MEDIA_URL = '/media/'
