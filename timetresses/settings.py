@@ -116,6 +116,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static",]
 
 #STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
+STATIC_ROOT = "/home/ubuntu/timetresser/staticfiles" #hogy ennek van e köze hozzá????
 
 
 MEDIA_URL = '/media/'
