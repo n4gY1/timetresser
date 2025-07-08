@@ -14,13 +14,17 @@ class UserForm(forms.ModelForm):
         labels = {
             'first_name': 'Vezetéknév',
             'last_name': 'Keresztnév',
+            'email':'E-mail',
             'password': 'Jelszó',
+            'confirm_password':'Jelszó megerősítése'
         }
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control bg-primary text-light'
+            self.fields['password'].label = 'Jelszó'
+            self.fields['confirm_password'].label = 'Jelszó megerősítése'
 
 
 class UserProfileForm(forms.ModelForm):
