@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)wo^pxcqp)z&5!u@h*o0mx#(7e&(^u92!uqm1!ns&w(i%&@x&i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['https://timetresser-917e75b313f7.herokuapp.com','timetresser-917e75b313f7.herokuapp.com','localhost']
 #ALLOWED_HOSTS = ["idopontok.run.place", "localhost", "127.0.0.1"]
