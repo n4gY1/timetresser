@@ -1,0 +1,24 @@
+{% autoescape off %}
+
+
+Tisztelt {{booking.service.name}}!
+Ez az üzenet a Mytimes.hu weboldal automatikusan generált értesítése,
+miszerint egy új időpont foglalása történt az alábbi adatokkal.
+
+A foglalt időpont kezdete: {{booking.start_time}}
+Foglaló neve: {{booking.booked_user.get_name}}
+Foglaló megjegyzése:
+{{booking.description}}
+
+Az elfogadáshoz vagy elutasításhoz kattintson a következő linkre:
+{{current_site}}/{% url 'show_not_accept_booking' booking.id %}
+
+
+Kérjük, erre a levélre ne válaszoljon, ne küldjön üzenetet. Ez egy automatikusan generált levél!
+
+
+Üdvüzlettel:
+MyTimes.hu
+{{current_site}}
+
+{% endautoescape %}

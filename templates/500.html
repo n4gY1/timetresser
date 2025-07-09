@@ -6,5 +6,10 @@
 
 
 {% block content %}
-<h2 class="text-center alert alert-danger py-2">Szerver probléma adódott</h2>
+    {% include 'includes/mytimes_html_banner.html' %}
+    <div class="container my-2 text-center">
+        <h1 class="text-light ">ERROR 500</h1>
+        <h5 class="text-light">PROBLÉMA A SZEVERREL VAGY JOGOSULATLAN KÉRÉS TÖRTÉNT</h5>
+        <a href="/" class="text-info">Vissza a főoldalra</a>
+    </div>
 {% endblock content %}

@@ -13,7 +13,7 @@ from account.models import UserProfile, User
 from booking.forms import BookingForm, BookingManageForm, BookingGuestForm
 from booking.models import Booking
 from service_provider.models import ServiceProvider
-from timetresses.utils import send_accept_mail, send_not_accept_mail
+from timetresses.utils import send_accept_mail, send_not_accept_mail, send_new_booking_mail
 
 
 @login_required(login_url='login')
@@ -31,10 +31,12 @@ def add_booking(request, selected_date, service_provider_slug):
 
     tmp = current_date + timezone.timedelta(minutes=min_res)
     """
+    # a datetime és localizációs dátumok nem összeegyezehtősége miatt van hiba
     if sp.expired_date < current_date:
-        messages.warning(request, "A szolgáltató licensze lejárt. Nem lehet nála foglalni")
+        messages.warning(request, "A szolgáltató licensze lejárt. Sajnos nem lehet nála foglalni")
         return redirect('home')
     """
+
 
     if request.method == "POST":
         bookings = Booking.objects.filter(
@@ -56,12 +58,15 @@ def add_booking(request, selected_date, service_provider_slug):
                     start_time=selected_date,
                     description=description
                 )
-                messages.success(request, "Sikeres foglalás, várja meg a vissza igazoló email-t")
+                send_new_booking_mail(request=request,booking=booked)
+                messages.success(request, "Sikeres foglalás, elfogadáskor visszaigazoló email-t küldünk.")
+
                 return redirect('view_service', service_slug=sp.slug)
             except Exception as e:
-                messages.error(request, "Hiba történt" + e)
+                messages.error(request, "Hiba történt " + str(e))
+                print(e)
         else:
-            messages.error(request, "Sajnos az időpont lefoglalásra került")
+            messages.error(request, "Sajnos ez az időpont már időközben lefoglalásra került")
     context = {
         "form": form,
         "selected_date": selected_date,

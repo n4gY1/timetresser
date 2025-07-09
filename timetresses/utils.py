@@ -64,3 +64,14 @@ def send_not_accept_mail(request, booking):
     to_email = booking.booked_user.user.email
     mail = EmailMessage(mail_subject, message, to=[to_email],from_email="MyTimes.hu <mytimesdev@gmail.com")
     mail.send()
+
+def send_new_booking_mail(request,booking):
+    current_site = get_current_site(request)
+    mail_subject = 'Új foglalás'
+    message = render_to_string('booking/email/new_booking.html', {
+        'booking': booking,
+        'current_site': current_site,
+    })
+    to_email = booking.service.user_profile.get_email()
+    mail = EmailMessage(mail_subject, message, to=[to_email], from_email="MyTimes.hu <mytimesdev@gmail.com")
+    mail.send()

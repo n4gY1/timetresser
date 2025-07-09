@@ -6,5 +6,10 @@
 
 
 {% block content %}
-<h2 class="text-center alert alert-warning py-2">Az oldal nem található, kérjük, térjen vissza a nyitó oldalra: <a href="{% url 'home' %}">Vissza</a></h2>
+    {% include 'includes/mytimes_html_banner.html' %}
+    <div class="container my-2 text-center">
+        <h1 class="text-light ">ERROR 404</h1>
+        <h5 class="text-light">AZ OLDAL NEM TALÁLHATÓ</h5>
+        <a href="/" class="text-info">Vissza a főoldalra</a>
+    </div>
 {% endblock content %}

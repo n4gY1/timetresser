@@ -7,11 +7,7 @@
 
 {% block content %}
 
-<div class="text-center">
-    <h3 class="text-light">{{service_provider.name}}</h3>
-    <h5 class="small text-dark">{{service_provider.user_profile.get_name}}</h5>
-    <hr>
-</div>
+
 
 {% for booking in bookings %}
 <div class="row mx-0 mb-1">

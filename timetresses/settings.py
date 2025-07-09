@@ -116,11 +116,10 @@ STATIC_URL = 'static/'
 #STATICFILES_DIRS = [BASE_DIR / "static",]
 
 #STATIC_ROOT = "/home/nagy-webpages/timetresser/publishstaticfiles" #hogy ennek van e köze hozzá????
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 MEDIA_URL = '/media/'
