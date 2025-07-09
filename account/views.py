@@ -99,7 +99,7 @@ def settings(request):
 
     bookings = user_profile.my_bookings.all().order_by('-start_time')
     accept_bookings = bookings.filter(is_accept=True).order_by('start_time')
-    my_ratings = user_profile.my_ratings.all()
+    my_ratings = user_profile.my_ratings.all().order_by('-created_at')
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
