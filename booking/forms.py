@@ -24,7 +24,7 @@ class BookingGuestForm(forms.ModelForm):
         'class': 'form-control bg-primary', 'type': 'datetime-local'
     }), label='Kezdési időpont')
 
-    length = forms.IntegerField(max_value=300,min_value=10,label="Saccolt időtartam percben")
+    length = forms.IntegerField(max_value=300,min_value=10,label="Tervezett időtartam percben")
 
     class Meta:
         model = Booking
