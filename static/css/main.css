@@ -209,8 +209,12 @@ input[type="checkbox"]:checked {
 .lightbox-content {
     margin: auto;
     display: block;
-    max-width: 90%;
-    max-height: 80%;
+    width: 90vw;
+    max-height:90%;
+    height: auto;
+    image-rendering: auto;
+    object-fit: contain;
+
 }
 
 .lightbox-close {
