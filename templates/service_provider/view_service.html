@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load static %}
 {% load tz %}
 {% block title %}{{obj.name}}{% endblock title %}
 
@@ -9,7 +10,7 @@
 {% block content %}
 
 <div class="text-center">
-    <img src="{{obj.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar">
+    <img src="{{obj.banner_picture.url}}" alt="service provider picture" class="shadow-4-strong avatar-wide">
     <hr>
     <h3 class="text-light">{{obj.name}}</h3>
     <h5 class="small text-info">{{obj.user_profile.get_name}}</h5>
@@ -131,7 +132,7 @@
                 <div class="col-md-4 col-6 mb-2">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{picture.image.url}}" alt="" class="card-pict">
+                            <img src="{{picture.image.url}}" alt="" class="card-pict lightbox-trigger" data-full="{{picture.image.url}}">
                         </div>
                     </div>
                 </div>
@@ -185,11 +186,12 @@
     </div>
 
 
-
-    
-
 </div>
 
-
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+</div>
 
 {% endblock content %}
+{% block script %}<script src="{% static 'js/reference_pict.js' %}"></script>{% endblock script %}
