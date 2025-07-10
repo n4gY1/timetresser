@@ -22,7 +22,7 @@ from service_provider.utils import FreeBookingTimes, get_service_providers_sorte
 # Create your views here.
 def home(request):
     #objs = ServiceProvider.objects.filter(expired_date__gte=datetime.datetime.now())
-    print(request.user)
+
     if request.user.is_authenticated:
         user_profile = get_object_or_404(UserProfile, user=request.user)
         objs = get_service_providers_sorted_by_user_bookings(user_profile)
@@ -69,7 +69,7 @@ def service_settings(request):
             day = opening_hour_form.cleaned_data['day']
             start_ime = opening_hour_form.cleaned_data['start_time']  # 7:50
             end_time = opening_hour_form.cleaned_data['end_time']
-            print(start_ime, type(start_ime))
+
 
             opening_day = ServiceProviderOpeningHours.objects.filter(
                 day=day, service_provider=service_provider)
@@ -249,9 +249,12 @@ def settings_refer_picture(request):
     service_provider = get_object_or_404(ServiceProvider, user_profile=user_profile)
 
     refer_picture_form = ServiceProviderPictureForm()
-
+    print()
     if request.method == 'POST':
         refer_picture_form = ServiceProviderPictureForm(request.POST, request.FILES)
+        if service_provider.refer_pictures.count() >= 6:
+            messages.warning(request,"Túllépte a képek feltöltésének maximális számát!")
+            return redirect('settings_refer_picture')
         if refer_picture_form.is_valid():
             obj = refer_picture_form.save(commit=False)
             obj.service_provider = service_provider
