@@ -28,8 +28,20 @@
     <form action="" class="form" method="post">
         {% csrf_token %}
         {{form}}
-        <p class="py-2 text-center"><em>A regisztrációt követően egy megerősítő e-mailt küldünk, amelyben található hivatkozás segítségével véglegesítheti fiókját</em></p>
+        <p class="py-2 text-center"><em>A regisztrációt követően egy megerősítő e-mailt küldünk, amelyben található hivatkozás segítségével véglegesítheti fiókját.</em></p>
         <button type="submit" class="btn w-100 my-2 btn-success">Regisztráció</button>
+
+
+        <p class="text-light" style="font-size:0.9rem">
+            A Regisztrációval / Bejelentkezéssel elismeri, hogy az adatvédelmi tájékoztatót elolvasta és elfogadja.
+
+        </p>
+        <div class="text-center">
+            <a href="{% url 'privacy_policy' %}" class="text-info text-center">Adatvédelmi Tájékoztató</a>
+        </div>
+
+
+
         <div class="text-center py-2">
             <a  href="{% url 'login' %}" class="text-info">Van már fiókom, bejelentkezek</a>
         </div>
