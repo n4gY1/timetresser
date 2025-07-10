@@ -20,7 +20,7 @@ from django.urls import path, include, re_path
 from django.views.static import serve
 
 from timetresses import settings
-
+from timetresses.views import privacy_policy_view
 
 urlpatterns = [
     path('', include('service_provider.urls')),
@@ -29,6 +29,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('account/', include('account.urls')),
     path('rating/', include('rating.urls')),
+    path('privacy_policy/',privacy_policy_view,name="privacy_policy")
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

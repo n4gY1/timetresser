@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Adatkezelési tájékoztató{% endblock title %}
+
+
+
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-light text-center">Adatvédelmi tájékoztató</h1>
+   <div class="container text-light py-5">
+
+  <h3 class="text-light">Adatvédelmi tájékoztató</h3>
+  <h5 class="text-secondary">
+    A MyTimes.hu (továbbiakban: Szolgáltatás) működtetőjeként tiszteletben tartjuk a felhasználók személyes adataihoz fűződő jogait,
+    és elkötelezettek vagyunk azok védelme mellett. Jelen tájékoztató célja, hogy átlátható módon bemutassa, milyen adatokat gyűjtünk,
+    hogyan kezeljük azokat, valamint milyen jogok illetik meg Önt az adatok kezelése kapcsán.
+  </h5>
+
+  <h3 class="text-light">1. Az adatkezelő adatai</h3>
+  <h5 class="text-secondary">
+    Adatkezelő: MyTimes.hu<br>
+    Szerver elhelyezkedése: Amazon Web Services, Europe (Frankfurt) adatközpont<br>
+    Kapcsolatfelvétel: [Ide írd be az email címet vagy elérhetőséget]
+  </h5>
+
+  <h3 class="text-light">2. Kezelt személyes adatok köre</h3>
+  <h5 class="text-secondary">
+    <strong class="text-light">2.1. Regisztrált felhasználók esetén:</strong><br>
+    - Vezetéknév<br>
+    - Keresztnév<br>
+    - E-mail cím<br>
+    - (Nem kötelező) Telefonszám<br>
+    - (Nem kötelező) Profilkép
+  </h5>
+  <h5 class="text-secondary">
+    <strong class="text-light">2.2. Üzleti fiók esetén, a fentieken túl:</strong><br>
+    - Üzlet neve és címe<br>
+    - Nyitva tartás<br>
+    - Telefonszám<br>
+    - Üzlet referencia képei<br>
+    - Üzlet rövid leírása<br>
+    - Árak és szolgáltatás típusa
+  </h5>
+  <h5 class="text-secondary">
+    <strong class="text-light">2.3. Vélemények esetén:</strong><br>
+    - 1–5-ig terjedő értékelés az üzletről<br>
+    - Szöveges vélemény (leírás)<br>
+    - A véleményhez kapcsolt felhasználó (név megjelenítése csak ha engedélyezett)
+  </h5>
+
+  <h3 class="text-light">3. Az adatkezelés célja</h3>
+  <h5 class="text-secondary">
+    - A weboldalon történő időpontfoglalási szolgáltatás biztosítása<br>
+    - Felhasználói fiókok létrehozása és kezelése<br>
+    - Üzleti profilok és vélemények nyilvános megjelenítése<br>
+    - Kommunikáció a felhasználókkal<br>
+    - A szolgáltatások minőségének javítása felhasználói visszajelzések alapján
+  </h5>
+
+  <h3 class="text-light">4. Adattovábbítás és adatfeldolgozók</h3>
+  <h5 class="text-secondary">
+    Az Ön adatait semmilyen harmadik féllel nem osztjuk meg, kivéve ha azt jogszabály írja elő.
+  </h5>
+
+  <h3 class="text-light">5. Cookie-k kezelése</h3>
+  <h5 class="text-secondary">
+    A weboldal alapvető technikai cookie-kat használ, amelyek az oldal működéséhez szükségesek.
+    Ezek a cookie-k nem tartalmaznak személyes adatot, céljuk a felhasználói munkamenet (session) kezelése.
+  </h5>
+  <h5 class="text-secondary">
+    <strong>Használt cookie-k:</strong><br>
+    - sessionid – A bejelentkezett felhasználó munkamenetének azonosítója<br>
+    &nbsp;&nbsp;&nbsp;Tárolás időtartama: A böngésző bezárásáig vagy legfeljebb 2 hét, ha a felhasználó a "maradjak bejelentkezve" opciót választja
+  </h5>
+  <h5 class="text-secondary">
+    Egyéb nyomkövető vagy marketing célú cookie-kat nem használunk.
+  </h5>
+
+  <h3 class="text-light">6. Weboldal használatának feltételei</h3>
+  <h5 class="text-secondary">
+    A weboldal szabadon megtekinthető bárki számára.<br>
+    Időpontfoglalás és vélemény írása csak bejelentkezett felhasználók számára érhető el.
+  </h5>
+  <h5 class="text-secondary">
+    A regisztrációval vagy bejelentkezéssel a felhasználó elfogadja a jelen adatvédelmi tájékoztatóban foglaltakat.
+  </h5>
+
+  <h3 class="text-light">7. Az érintettek jogai</h3>
+  <h5 class="text-secondary">
+    Az érintettek jogosultak:<br>
+    - Tájékoztatást kérni a kezelt adataikról<br>
+    - Hozzáférést kérni saját adataikhoz<br>
+    - Adataik helyesbítését vagy törlését kérni<br>
+    - Az adatkezelés korlátozását kérni<br>
+    - Tiltakozni az adatkezelés ellen<br>
+    - Panaszt tenni a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (NAIH)
+  </h5>
+
+  <h3 class="text-light">8. Az adatkezelés időtartama</h3>
+  <h5 class="text-secondary">
+    A személyes adatokat a felhasználói fiók meglétéig kezeljük.<br>
+    A vélemények az üzleti profil részeként az oldalon maradhatnak, kivéve ha a felhasználó kéri azok törlését.<br>
+    A fiók törlésével az összes hozzá kapcsolódó adat is törlésre kerül.
+  </h5>
+
+  <h3 class="text-light">9. Adatbiztonság</h3>
+  <h5 class="text-secondary">
+    Az adatokat az Amazon Web Services európai (Frankfurt) adatközpontjában tároljuk.<br>
+    Minden adatkezelés biztonságos csatornán, titkosítva történik.<br>
+    Kiemelt figyelmet fordítunk arra, hogy illetéktelenek ne férhessenek hozzá semmilyen személyes adathoz.
+  </h5>
+
+</div>
+
+
+</div>
+
+{% endblock content %}

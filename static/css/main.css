@@ -5,11 +5,9 @@
 
 body {
     background-color:#0A0913;
-
     min-height:100vh;
     background-size:cover;
     background-repeat:no-repeat;
-
     background-attachment:fixed;
 }
 
