@@ -64,6 +64,11 @@ def service_settings(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Módosítás sikeres")
+            return redirect('service_settings')
+        else:
+            messages.warning(request,"Nem megfelelő formátumó adatok")
+
+
 
         if opening_hour_form.is_valid():
             day = opening_hour_form.cleaned_data['day']
@@ -77,6 +82,7 @@ def service_settings(request):
                 tmp = ServiceProviderOpeningHoursForm(request.POST, instance=opening_day[0])
                 tmp.save()
                 messages.success(request,"Nyitva tartás módosítása sikeres")
+                return redirect('service_settings')
             else:
                 ServiceProviderOpeningHours.objects.create(
                     day=day,
@@ -85,7 +91,8 @@ def service_settings(request):
                     service_provider=service_provider
                 )
                 messages.success(request, "Nyitva tartás rögzítése sikeres")
-        return redirect('service_settings')
+                return redirect('service_settings')
+
 
     if service_provider:
         context = {

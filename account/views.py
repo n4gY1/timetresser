@@ -27,7 +27,7 @@ def login(request):
 
             return redirect('home')
         else:
-            messages.success(request, "Hibás felhasználónév vagy jelszó, vagy a fiók még nincs megerősítve ")
+            messages.warning(request, "Hibás felhasználónév vagy jelszó, vagy a fiók még nincs megerősítve ")
             #print(email, password)
             return redirect('login')
 

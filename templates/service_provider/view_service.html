@@ -73,16 +73,26 @@
         </div>
         <div class="row">
             <div class="col-2"><i class="fa-regular fa-comment"></i></div>
-
             <div class="col-10">{{obj.description}}</div>
-
         </div>
         <div class="row">
             <div class="col-2"><i class="fa-solid fa-wallet"></i></div>
-
             <div class="col-10">{{obj.prices|linebreaks}}</div>
-
         </div>
+
+        {% if obj.fb_link %}
+        <div class="row">
+            <div class="col-2"><i class="fa-brands fa-facebook"></i></div>
+            <div class="col-10"><a href="{{obj.fb_link}}" target="_blank" class="text-info">{{obj.fb_link}}</a></div>
+        </div>
+        {% endif %}
+
+        {% if obj.insta_link %}
+        <div class="row">
+            <div class="col-2"><i class="fa-brands fa-square-instagram"></i></div>
+            <div class="col-10"><a href="{{obj.insta_link}}" target="_blank" class="text-info">{{obj.insta_link}}</a></div>
+        </div>
+        {% endif %}
 
 
 
@@ -176,7 +186,7 @@
                     </div>
                 </div>
             {% empty %}
-                <h5 class="text-center text-dark">Nincsenek vélemények</h5>
+                <h5 class="text-center text-secondary">Nincsenek vélemények</h5>
             {% endfor %}
             </div>
 

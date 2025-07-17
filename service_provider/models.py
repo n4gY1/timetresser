@@ -41,10 +41,12 @@ class ServiceProvider(models.Model):
     banner_picture = models.ImageField(upload_to='service_providers_banners')
 
     mobile = models.CharField(max_length=50)
-
+    fb_link = models.URLField(blank=True,null=True)
+    insta_link = models.URLField(blank=True,null=True)
     expired_date = models.DateTimeField()
 
     description = models.TextField(blank=True, null=True)
+
 
     prices = models.TextField(blank=True, null=True)
 

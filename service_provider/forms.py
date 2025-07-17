@@ -12,6 +12,8 @@ class ServiceProviderForm(forms.ModelForm):
         labels = {
             'banner_picture': 'Borítókép',
             'phone_number': 'Telefonszám',
+            'fb_link':'Facebook oldal',
+            'insta_link':'Instagram oldal',
             'description': 'Leírás',
             'prices': 'Árlista',
             'booking_date_nr': 'Előre foglalható napok maximum száma',
