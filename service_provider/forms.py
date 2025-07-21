@@ -18,8 +18,12 @@ class ServiceProviderForm(forms.ModelForm):
             'prices': 'Árlista',
             'booking_date_nr': 'Előre foglalható napok maximum száma',
             'booking_time_interval': 'Foglalások közötti időkülönbség (perc)',
+            'city':'Város',
+            'state':'Megye',
+            'street':'Utca',
             'name': 'Üzlet neve',
-            'type': 'Fő profil'
+            'type': 'Fő profil',
+            'zip_code':'Irányítószám'
         }
 
     def __init__(self, *args, **kwargs):
